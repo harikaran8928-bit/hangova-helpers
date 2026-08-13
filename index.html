@@ -10,67 +10,59 @@
         .neon-border { border: 1px solid #ff2e93; box-shadow: 0 0 15px rgba(255, 46, 147, 0.2); }
         .neon-btn { background: linear-gradient(90deg, #ff2e93, #ff8a00); }
         .neon-text { background: linear-gradient(90deg, #ff2e93, #ff8a00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        
-        /* HIDE GOOGLE BANNER AND WIDGET OVERLAYS */
-        .goog-te-banner-frame, .goog-te-gadget, #goog-gt-tt { display: none !important; }
-        body { top: 0px !important; }
     </style>
 </head>
 <body class="antialiased selection:bg-pink-500 selection:text-white">
 
-    <!-- NAVBAR WITH DIRECT TAMIL BUTTON -->
+    <!-- NAVBAR WITH WORKING TAMIL TOGGLE -->
     <nav class="flex justify-between items-center px-6 py-4 border-b border-gray-800 bg-gray-950/80 backdrop-blur-md fixed w-full top-0 z-50">
       <div class="text-2xl font-black tracking-wider neon-text">
         HANGOVA HELPERS
       </div>
       <div class="flex items-center space-x-3 text-sm font-semibold">
-        <a href="index.html" class="text-pink-400">Home</a>
-        <a href="services.html" class="hover:text-pink-400 transition">Services</a>
-        <a href="about.html" class="hover:text-pink-400 transition">About</a>
-        <a href="services.html" class="neon-btn text-white font-bold px-4 py-1.5 rounded-full text-xs hover:opacity-90 transition">
+        <a href="index.html" class="text-pink-400 nav-home">Home</a>
+        <a href="services.html" class="hover:text-pink-400 transition nav-services">Services</a>
+        <a href="about.html" class="hover:text-pink-400 transition nav-about">About</a>
+        <a href="services.html" class="neon-btn text-white font-bold px-4 py-1.5 rounded-full text-xs hover:opacity-90 transition nav-gethelp">
           Get Help
         </a>
-        <!-- TAMIL TOGGLE BUTTON DIRECTLY IN NAVBAR -->
-        <button onclick="toggleTamil()" id="langBtn" class="bg-pink-600 hover:bg-pink-700 text-white font-bold text-xs px-3 py-1.5 rounded-full transition cursor-pointer">
+        <button onclick="toggleLanguage()" id="langBtn" class="bg-pink-600 hover:bg-pink-700 text-white font-bold text-xs px-3 py-1.5 rounded-full transition cursor-pointer">
           தமிழ்
         </button>
       </div>
     </nav>
 
-    <!-- HIDDEN GOOGLE TRANSLATE ENGINE -->
-    <div id="google_translate_element" style="display:none;"></div>
-
     <!-- HERO SECTION -->
     <section class="pt-36 pb-20 px-6 text-center max-w-4xl mx-auto">
-        <span class="bg-pink-950/80 text-pink-400 text-xs font-semibold px-4 py-1.5 rounded-full uppercase tracking-widest border border-pink-800/50 inline-block mb-6">
+        <span id="hero-badge" class="bg-pink-950/80 text-pink-400 text-xs font-semibold px-4 py-1.5 rounded-full uppercase tracking-widest border border-pink-800/50 inline-block mb-6">
             🔥 #1 Chat & Dating Rescue Service
         </span>
         
-        <h1 class="text-4xl md:text-6xl font-black leading-tight mb-6">
+        <h1 id="hero-title" class="text-4xl md:text-6xl font-black leading-tight mb-6">
             Stuck in Chat? <br>
             <span class="neon-text">HANGOVA HELPERS</span> Got You.
         </h1>
         
-        <p class="text-gray-400 text-lg md:text-xl mb-8 max-w-2xl mx-auto leading-relaxed">
+        <p id="hero-desc" class="text-gray-400 text-lg md:text-xl mb-8 max-w-2xl mx-auto leading-relaxed">
             Don't get ghosted! Upload your chat screenshots, get high-converting text scripts & strategic dating advice from our assigned experts.
         </p>
 
         <div class="flex flex-col sm:flex-row justify-center gap-4 mb-12">
-            <a href="#services" class="neon-btn text-white font-bold text-lg px-8 py-4 rounded-xl shadow-lg hover:scale-105 transition transform">
+            <a href="#services" id="btn-rescue" class="neon-btn text-white font-bold text-lg px-8 py-4 rounded-xl shadow-lg hover:scale-105 transition transform">
                 🚀 Rescue My Chat (from ₹20)
             </a>
-            <a href="#how" class="bg-gray-800 hover:bg-gray-700 text-white font-semibold text-lg px-8 py-4 rounded-xl transition">
+            <a href="#how" id="btn-how" class="bg-gray-800 hover:bg-gray-700 text-white font-semibold text-lg px-8 py-4 rounded-xl transition">
                 How It Works
             </a>
         </div>
 
         <!-- SAFETY & PRIVACY HIGHLIGHT -->
         <div class="neon-border bg-gray-900/60 rounded-2xl p-5 text-left max-w-xl mx-auto text-xs text-gray-300">
-            <p class="font-bold text-pink-400 text-sm mb-2">🛡️ Official Policy & Safety Guarantee:</p>
+            <p id="policy-title" class="font-bold text-pink-400 text-sm mb-2">🛡️ Official Policy & Safety Guarantee:</p>
             <ul class="list-disc pl-4 space-y-1.5 text-gray-400">
-                <li>Only officially assigned <b>HANGOVA HELPERS</b> staff will process your request.</li>
-                <li>We only provide guidance & text scripting (No direct account takeover).</li>
-                <li><b>100% Privacy:</b> Screenshots are strictly confidential & permanently deleted post-session.</li>
+                <li id="policy-1">Only officially assigned HANGOVA HELPERS staff will process your request.</li>
+                <li id="policy-2">We only provide guidance & text scripting (No direct account takeover).</li>
+                <li id="policy-3">100% Privacy: Screenshots are strictly confidential & permanently deleted post-session.</li>
             </ul>
         </div>
     </section>
@@ -78,23 +70,23 @@
     <!-- HOW IT WORKS -->
     <section id="how" class="py-20 px-6 bg-gray-950 border-t border-b border-gray-800/50">
         <div class="max-w-5xl mx-auto">
-            <h2 class="text-3xl font-extrabold text-center mb-12">How It Works <span class="neon-text">(3 Simple Steps)</span></h2>
+            <h2 id="how-title" class="text-3xl font-extrabold text-center mb-12">How It Works <span class="neon-text">(3 Simple Steps)</span></h2>
             
             <div class="grid md:grid-cols-3 gap-8">
                 <div class="bg-gray-900/80 p-6 rounded-2xl border border-gray-800 text-center">
                     <div class="w-12 h-12 neon-btn flex items-center justify-center rounded-full text-white font-bold text-xl mx-auto mb-4">1</div>
-                    <h3 class="text-xl font-bold mb-2">Upload Screenshot</h3>
-                    <p class="text-gray-400 text-sm">Blur out private details and send us the chat context where you feel stuck or confused.</p>
+                    <h3 id="step1-h" class="text-xl font-bold mb-2">Upload Screenshot</h3>
+                    <p id="step1-p" class="text-gray-400 text-sm">Blur out private details and send us the chat context where you feel stuck or confused.</p>
                 </div>
                 <div class="bg-gray-900/80 p-6 rounded-2xl border border-gray-800 text-center">
                     <div class="w-12 h-12 neon-btn flex items-center justify-center rounded-full text-white font-bold text-xl mx-auto mb-4">2</div>
-                    <h3 class="text-xl font-bold mb-2">Expert Analysis</h3>
-                    <p class="text-gray-400 text-sm">An assigned Hangova Helpers expert analyzes the vibe, tone, and underlying psychology.</p>
+                    <h3 id="step2-h" class="text-xl font-bold mb-2">Expert Analysis</h3>
+                    <p id="step2-p" class="text-gray-400 text-sm">An assigned Hangova Helpers expert analyzes the vibe, tone, and underlying psychology.</p>
                 </div>
                 <div class="bg-gray-900/80 p-6 rounded-2xl border border-gray-800 text-center">
                     <div class="w-12 h-12 neon-btn flex items-center justify-center rounded-full text-white font-bold text-xl mx-auto mb-4">3</div>
-                    <h3 class="text-xl font-bold mb-2">Get Perfect Replies</h3>
-                    <p class="text-gray-400 text-sm">Receive tailored text options and strategic advice to keep the conversation engaging.</p>
+                    <h3 id="step3-h" class="text-xl font-bold mb-2">Get Perfect Replies</h3>
+                    <p id="step3-p" class="text-gray-400 text-sm">Receive tailored text options and strategic advice to keep the conversation engaging.</p>
                 </div>
             </div>
         </div>
@@ -102,71 +94,71 @@
 
     <!-- SERVICES & PRICING -->
     <section id="services" class="py-20 px-6 max-w-5xl mx-auto">
-        <h2 class="text-3xl font-extrabold text-center mb-4">Choose Your <span class="neon-text">Rescue Plan</span></h2>
-        <p class="text-center text-gray-400 mb-12">Special Launch Offer — Instant response guaranteed.</p>
+        <h2 id="plan-title" class="text-3xl font-extrabold text-center mb-4">Choose Your <span class="neon-text">Rescue Plan</span></h2>
+        <p id="plan-subtitle" class="text-center text-gray-400 mb-12">Special Launch Offer — Instant response guaranteed.</p>
 
         <div class="grid md:grid-cols-3 gap-8">
             <!-- Basic Plan -->
             <div class="bg-gray-900/50 border border-gray-800 p-8 rounded-2xl hover:border-pink-500/50 transition flex flex-col justify-between">
                 <div>
-                    <h3 class="text-xl font-bold mb-2">Single Chat Rescue</h3>
+                    <h3 id="p1-title" class="text-xl font-bold mb-2">Single Chat Rescue</h3>
                     <p class="text-3xl font-extrabold mb-4">₹20 <span class="text-sm font-normal text-gray-400">/ session</span></p>
                     <ul class="text-gray-400 text-sm space-y-3 mb-8">
-                        <li>✓ 1 Active Chat Screenshot Audit</li>
-                        <li>✓ 3 Custom Reply Options</li>
-                        <li>✓ Response within 30 mins</li>
+                        <li id="p1-f1">✓ 1 Active Chat Screenshot Audit</li>
+                        <li id="p1-f2">✓ 3 Custom Reply Options</li>
+                        <li id="p1-f3">✓ Response within 30 mins</li>
                     </ul>
                 </div>
-                <a href="https://wa.me/916379950481?text=Hi%20Hangova%20Helpers!%20I%20want%20to%20order%20Single%20Chat%20Rescue%20(%E2%82%B920)." target="_blank" class="block text-center bg-gray-800 hover:bg-gray-700 text-white font-bold py-3 rounded-xl transition">Select Plan</a>
+                <a href="https://wa.me/916379950481?text=Hi%20Hangova%20Helpers!%20I%20want%20to%20order%20Single%20Chat%20Rescue%20(%E2%82%B920)." target="_blank" class="block text-center bg-gray-800 hover:bg-gray-700 text-white font-bold py-3 rounded-xl transition plan-btn">Select Plan</a>
             </div>
 
             <!-- Pro Plan (Popular) -->
             <div class="neon-border bg-gray-900 p-8 rounded-2xl relative flex flex-col justify-between">
                 <div>
-                    <span class="absolute -top-3 right-6 bg-pink-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase">Most Popular</span>
-                    <h3 class="text-xl font-bold mb-2">Pro Wingman</h3>
+                    <span id="pop-tag" class="absolute -top-3 right-6 bg-pink-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase">Most Popular</span>
+                    <h3 id="p2-title" class="text-xl font-bold mb-2">Pro Wingman</h3>
                     <p class="text-3xl font-extrabold mb-4">₹60 <span class="text-sm font-normal text-gray-400">/ 3 Days</span></p>
                     <ul class="text-gray-400 text-sm space-y-3 mb-8">
-                        <li>✓ Full Chat History Audit</li>
-                        <li>✓ 3 Days Ongoing Text Scripts</li>
-                        <li>✓ Bio & Profile Strategy</li>
-                        <li>✓ Assigned Helper Guidance</li>
+                        <li id="p2-f1">✓ Full Chat History Audit</li>
+                        <li id="p2-f2">✓ 3 Days Ongoing Text Scripts</li>
+                        <li id="p2-f3">✓ Bio & Profile Strategy</li>
+                        <li id="p2-f4">✓ Assigned Helper Guidance</li>
                     </ul>
                 </div>
-                <a href="https://wa.me/916379950481?text=Hi%20Hangova%20Helpers!%20I%20want%20to%20order%20Pro%20Wingman%20(%E2%82%B960)." target="_blank" class="block text-center neon-btn text-white font-bold py-3 rounded-xl transition">Select Plan</a>
+                <a href="https://wa.me/916379950481?text=Hi%20Hangova%20Helpers!%20I%20want%20to%20order%20Pro%20Wingman%20(%E2%82%B960)." target="_blank" class="block text-center neon-btn text-white font-bold py-3 rounded-xl transition plan-btn">Select Plan</a>
             </div>
 
             <!-- Strategy Call -->
             <div class="bg-gray-900/50 border border-gray-800 p-8 rounded-2xl hover:border-pink-500/50 transition flex flex-col justify-between">
                 <div>
-                    <h3 class="text-xl font-bold mb-2">1-on-1 Call Strategy</h3>
+                    <h3 id="p3-title" class="text-xl font-bold mb-2">1-on-1 Call Strategy</h3>
                     <p class="text-3xl font-extrabold mb-4">₹100 <span class="text-sm font-normal text-gray-400">/ call</span></p>
                     <ul class="text-gray-400 text-sm space-y-3 mb-8">
-                        <li>✓ 30-Min Private Audio Call</li>
-                        <li>✓ Mindset & Communication Coaching</li>
-                        <li>✓ Customized Action Plan</li>
+                        <li id="p3-f1">✓ 30-Min Private Audio Call</li>
+                        <li id="p3-f2">✓ Mindset & Communication Coaching</li>
+                        <li id="p3-f3">✓ Customized Action Plan</li>
                     </ul>
                 </div>
-                <a href="https://wa.me/916379950481?text=Hi%20Hangova%20Helpers!%20I%20want%20to%20book%201-on-1%20Strategy%20Call%20(%E2%82%B9100)." target="_blank" class="block text-center bg-gray-800 hover:bg-gray-700 text-white font-bold py-3 rounded-xl transition">Select Plan</a>
+                <a href="https://wa.me/916379950481?text=Hi%20Hangova%20Helpers!%20I%20want%20to%20book%201-on-1%20Strategy%20Call%20(%E2%82%B9100)." target="_blank" class="block text-center bg-gray-800 hover:bg-gray-700 text-white font-bold py-3 rounded-xl transition plan-btn">Select Plan</a>
             </div>
         </div>
     </section>
 
     <!-- FAQ SECTION -->
     <section id="faq" class="py-20 px-6 max-w-4xl mx-auto border-t border-gray-800">
-      <h2 class="text-3xl md:text-5xl font-black text-center mb-12">
+      <h2 id="faq-title" class="text-3xl md:text-5xl font-black text-center mb-12">
         Frequently Asked <span class="neon-text">Questions</span>
       </h2>
 
       <div class="space-y-6">
         <div class="bg-gray-900 border border-gray-800 p-6 rounded-2xl">
-          <h3 class="text-lg font-bold mb-2">Is my privacy 100% protected?</h3>
-          <p class="text-gray-400 text-sm">Yes! All shared screenshots and chats are kept strictly confidential and deleted immediately after guidance.</p>
+          <h3 id="faq1-q" class="text-lg font-bold mb-2">Is my privacy 100% protected?</h3>
+          <p id="faq1-a" class="text-gray-400 text-sm">Yes! All shared screenshots and chats are kept strictly confidential and deleted immediately after guidance.</p>
         </div>
 
         <div class="bg-gray-900 border border-gray-800 p-6 rounded-2xl">
-          <h3 class="text-lg font-bold mb-2">How fast will I get a response?</h3>
-          <p class="text-gray-400 text-sm">For active emergency requests, our experts respond within 5 to 15 minutes on WhatsApp.</p>
+          <h3 id="faq2-q" class="text-lg font-bold mb-2">How fast will I get a response?</h3>
+          <p id="faq2-a" class="text-gray-400 text-sm">For active emergency requests, our experts respond within 5 to 15 minutes on WhatsApp.</p>
         </div>
       </div>
     </section>
@@ -174,7 +166,7 @@
     <!-- FOOTER -->
     <footer class="border-t border-gray-800 py-8 px-6 text-center text-xs text-gray-500">
         <p class="mb-2">© 2026 HANGOVA HELPERS. All Rights Reserved.</p>
-        <p>Official Terms: All communication assistance is handled strictly by assigned Hangova Helpers representatives for guidance purposes only.</p>
+        <p id="footer-terms">Official Terms: All communication assistance is handled strictly by assigned Hangova Helpers representatives for guidance purposes only.</p>
     </footer>
 
     <!-- FLOATING WHATSAPP BUTTON -->
@@ -184,36 +176,109 @@
         </svg>
     </a>
 
-    <!-- TOGGLE SCRIPT -->
-    <script type="text/javascript">
-      function googleTranslateElementInit() {
-        new google.translate.TranslateElement({
-          pageLanguage: 'en',
-          includedLanguages: 'ta,en',
-          autoDisplay: false
-        }, 'google_translate_element');
-      }
+    <!-- CUSTOM DIRECT INSTANT TAMIL TOGGLE SCRIPT -->
+    <script>
+      let currentLang = 'en';
 
-      function toggleTamil() {
-        var btn = document.getElementById('langBtn');
-        var selectElem = document.querySelector('.goog-te-combo');
-        if (selectElem) {
-          if (btn.innerText.trim() === 'தமிழ்') {
-            selectElem.value = 'ta';
-            selectElem.dispatchEvent(new Event('change'));
-            btn.innerText = 'English';
-          } else {
-            selectElem.value = 'en';
-            selectElem.dispatchEvent(new Event('change'));
-            btn.innerText = 'தமிழ்';
+      const taText = {
+        'hero-badge': '🔥 #1 சாட் & டேட்டிங் உதவி சேவை',
+        'hero-title': 'சாட்டில் சிக்கிக் கொண்டீர்களா? <br><span class="neon-text">HANGOVA HELPERS</span> உங்களுக்காக உள்ளது.',
+        'hero-desc': 'ரிப்ளை வராமல் ஏமாறாதீர்கள்! உங்கள் சாட் ஸ்கிரீன்ஷாட்களை அனுப்புங்கள், எங்களின் வல்லுநர்களிடம் இருந்து சிறந்த பதில்கள் மற்றும் வழிகாட்டுதலைப் பெறுங்கள்.',
+        'btn-rescue': '🚀 என் சாட்டை காப்பாற்றுங்கள் (₹20 முதல்)',
+        'btn-how': 'இது எவ்வாறு இயங்குகிறது',
+        'policy-title': '🛡️ அதிகாரப்பூர்வ கொள்கை & பாதுகாப்பு உத்தரவாதம்:',
+        'policy-1': 'நியமிக்கப்பட்ட HANGOVA HELPERS பணியாளர்கள் மட்டுமே உங்கள் கோரிக்கையைச் செயல்படுத்துவார்கள்.',
+        'policy-2': 'நாங்கள் வழிகாட்டுதல் மற்றும் உரைத் தயாரிப்பை மட்டுமே வழங்குகிறோம் (நேரடி கணக்கு அணுகல் இல்லை).',
+        'policy-3': '100% தனியுரிமை: ஸ்கிரீன்ஷாட்கள் இரகசியமாக வைக்கப்பட்டு உடனடியாக அழிக்கப்படும்.',
+        'how-title': 'இது எவ்வாறு இயங்குகிறது <span class="neon-text">(3 எளிய படிகள்)</span>',
+        'step1-h': 'ஸ்கிரீன்ஷாட் அனுப்பவும்',
+        'step1-p': 'தனிப்பட்ட விவரங்களை மறைத்து, நீங்கள் குழப்பமாக உணரும் சாட் சூழலை எங்களுக்கு அனுப்புங்கள்.',
+        'step2-h': 'வல்லுநர் பகுப்பாய்வு',
+        'step2-p': 'எங்கள் வல்லுநர் உரையாடலின் தொனி மற்றும் சூழலை பகுப்பாய்வு செய்கிறார்.',
+        'step3-h': 'சிறந்த பதில்களைப் பெறுங்கள்',
+        'step3-p': 'உரையாடலைத் தொடர உங்களுக்கு ஏற்றவாறு தயாரித்த பதில்கள் மற்றும் ஆலோசனைகளைப் பெறுங்கள்.',
+        'plan-title': 'உங்கள் <span class="neon-text">திட்டத்தை தேர்ந்தெடுக்கவும்</span>',
+        'plan-subtitle': 'சிறப்புத் தொடக்கச் சலுகை — உடனடி பதில் உத்தரவாதம்.',
+        'p1-title': 'ஒற்றை சாட் உதவி',
+        'p1-f1': '✓ 1 சாட் ஸ்கிரீன்ஷாட் பகுப்பாய்வு',
+        'p1-f2': '✓ 3 தனிப்பயன் பதில் விருப்பங்கள்',
+        'p1-f3': '✓ 30 நிமிடங்களுக்குள் பதில்',
+        'pop-tag': 'மிகவும் பிரபலம்',
+        'p2-title': 'ப்ரோ விங்மேன்',
+        'p2-f1': '✓ முழு சாட் வரலாற்று பகுப்பாய்வு',
+        'p2-f2': '✓ 3 நாட்கள் தொடர்ச்சியான வழிகாட்டுதல்',
+        'p2-f3': '✓ பயோ மற்றும் சுயவிவர உத்தி',
+        'p2-f4': '✓ பிரத்யேக உதவியாளர் வழிகாட்டுதல்',
+        'p3-title': '1-க்கு-1 அழைப்பு உத்தி',
+        'p3-f1': '✓ 30 நிமிட ஆடியோ அழைப்பு',
+        'p3-f2': '✓ மனநிலை மற்றும் தகவல் தொடர்பு பயிற்சி',
+        'p3-f3': '✓ தனிப்பயனாக்கப்பட்ட செயல் திட்டம்',
+        'faq-title': 'அடிக்கடி கேட்கப்படும் <span class="neon-text">கேள்விகள்</span>',
+        'faq1-q': 'எனது தனியுரிமை 100% பாதுகாக்கப்பட்டதா?',
+        'faq1-a': 'ஆம்! பகிரப்பட்ட அனைத்து ஸ்கிரீன்ஷாட்களும் முற்றிலும் இரகசியமாக வைக்கப்பட்டு உடனடியாக அழிக்கப்படும்.',
+        'faq2-q': 'எனக்கு எவ்வளவு விரைவில் பதில் கிடைக்கும்?',
+        'faq2-a': 'அவசர கோரிக்கைகளுக்கு எங்களது வல்லுநர்கள் வாட்ஸ்அப்பில் 5 முதல் 15 நிமிடங்களுக்குள் பதிலளிப்பார்கள்.'
+      };
+
+      const enText = {
+        'hero-badge': '🔥 #1 Chat & Dating Rescue Service',
+        'hero-title': 'Stuck in Chat? <br><span class="neon-text">HANGOVA HELPERS</span> Got You.',
+        'hero-desc': "Don't get ghosted! Upload your chat screenshots, get high-converting text scripts & strategic dating advice from our assigned experts.",
+        'btn-rescue': '🚀 Rescue My Chat (from ₹20)',
+        'btn-how': 'How It Works',
+        'policy-title': '🛡️ Official Policy & Safety Guarantee:',
+        'policy-1': 'Only officially assigned HANGOVA HELPERS staff will process your request.',
+        'policy-2': 'We only provide guidance & text scripting (No direct account takeover).',
+        'policy-3': '100% Privacy: Screenshots are strictly confidential & permanently deleted post-session.',
+        'how-title': 'How It Works <span class="neon-text">(3 Simple Steps)</span>',
+        'step1-h': 'Upload Screenshot',
+        'step1-p': 'Blur out private details and send us the chat context where you feel stuck or confused.',
+        'step2-h': 'Expert Analysis',
+        'step2-p': 'An assigned Hangova Helpers expert analyzes the vibe, tone, and underlying psychology.',
+        'step3-h': 'Get Perfect Replies',
+        'step3-p': 'Receive tailored text options and strategic advice to keep the conversation engaging.',
+        'plan-title': 'Choose Your <span class="neon-text">Rescue Plan</span>',
+        'plan-subtitle': 'Special Launch Offer — Instant response guaranteed.',
+        'p1-title': 'Single Chat Rescue',
+        'p1-f1': '✓ 1 Active Chat Screenshot Audit',
+        'p1-f2': '✓ 3 Custom Reply Options',
+        'p1-f3': '✓ Response within 30 mins',
+        'pop-tag': 'Most Popular',
+        'p2-title': 'Pro Wingman',
+        'p2-f1': '✓ Full Chat History Audit',
+        'p2-f2': '✓ 3 Days Ongoing Text Scripts',
+        'p2-f3': '✓ Bio & Profile Strategy',
+        'p2-f4': '✓ Assigned Helper Guidance',
+        'p3-title': '1-on-1 Call Strategy',
+        'p3-f1': '✓ 30-Min Private Audio Call',
+        'p3-f2': '✓ Mindset & Communication Coaching',
+        'p3-f3': '✓ Customized Action Plan',
+        'faq-title': 'Frequently Asked <span class="neon-text">Questions</span>',
+        'faq1-q': 'Is my privacy 100% protected?',
+        'faq1-a': 'Yes! All shared screenshots and chats are kept strictly confidential and deleted immediately after guidance.',
+        'faq2-q': 'How fast will I get a response?',
+        'faq2-a': 'For active emergency requests, our experts respond within 5 to 15 minutes on WhatsApp.'
+      };
+
+      function toggleLanguage() {
+        const btn = document.getElementById('langBtn');
+        const langData = (currentLang === 'en') ? taText : enText;
+
+        for (let key in langData) {
+          const el = document.getElementById(key);
+          if (el) {
+            el.innerHTML = langData[key];
           }
+        }
+
+        if (currentLang === 'en') {
+          currentLang = 'ta';
+          btn.innerText = 'English';
         } else {
-          // If script delay, trigger again
-          setTimeout(toggleTamil, 500);
+          currentLang = 'en';
+          btn.innerText = 'தமிழ்';
         }
       }
     </script>
-    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
 </body>
 </html>
