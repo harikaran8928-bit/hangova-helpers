@@ -337,14 +337,19 @@
       let selectedPlanPrice = 0;
       let pendingOrderData = null;
 
-      // REMOVE PRELOADER COMPLETELY FROM DOM AFTER 2.8 SECONDS
-      setTimeout(() => {
-        const preloader = document.getElementById('introPreloader');
-        if (preloader) {
-          preloader.style.opacity = '0';
-          setTimeout(() => preloader.remove(), 700);
-        }
-      }, 2800);
+      // GUARANTEED PRELOADER REMOVAL (3.2 seconds exact)
+      window.addEventListener('DOMContentLoaded', () => {
+        setTimeout(() => {
+          const preloader = document.getElementById('introPreloader');
+          if (preloader) {
+            preloader.style.opacity = '0';
+            preloader.style.pointerEvents = 'none';
+            setTimeout(() => {
+              preloader.remove();
+            }, 700);
+          }
+        }, 2500);
+      });
 
       function triggerOrderForm(planName, price) {
         selectedPlanName = planName;
