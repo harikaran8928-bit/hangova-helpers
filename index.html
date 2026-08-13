@@ -10,13 +10,15 @@
         .neon-border { border: 1px solid #ff2e93; box-shadow: 0 0 15px rgba(255, 46, 147, 0.2); }
         .neon-btn { background: linear-gradient(90deg, #ff2e93, #ff8a00); }
         .neon-text { background: linear-gradient(90deg, #ff2e93, #ff8a00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .goog-te-banner-frame, .goog-te-gadget { display: none !important; }
+        
+        /* HIDE GOOGLE BANNER AND WIDGET OVERLAYS */
+        .goog-te-banner-frame, .goog-te-gadget, #goog-gt-tt { display: none !important; }
         body { top: 0px !important; }
     </style>
 </head>
 <body class="antialiased selection:bg-pink-500 selection:text-white">
 
-    <!-- NAVBAR -->
+    <!-- NAVBAR WITH DIRECT TAMIL BUTTON -->
     <nav class="flex justify-between items-center px-6 py-4 border-b border-gray-800 bg-gray-950/80 backdrop-blur-md fixed w-full top-0 z-50">
       <div class="text-2xl font-black tracking-wider neon-text">
         HANGOVA HELPERS
@@ -28,14 +30,14 @@
         <a href="services.html" class="neon-btn text-white font-bold px-4 py-1.5 rounded-full text-xs hover:opacity-90 transition">
           Get Help
         </a>
-        <!-- TAMIL TOGGLE BUTTON -->
+        <!-- TAMIL TOGGLE BUTTON DIRECTLY IN NAVBAR -->
         <button onclick="toggleTamil()" id="langBtn" class="bg-pink-600 hover:bg-pink-700 text-white font-bold text-xs px-3 py-1.5 rounded-full transition cursor-pointer">
           தமிழ்
         </button>
       </div>
     </nav>
 
-    <!-- HIDDEN TRANSLATE ELEMENT -->
+    <!-- HIDDEN GOOGLE TRANSLATE ENGINE -->
     <div id="google_translate_element" style="display:none;"></div>
 
     <!-- HERO SECTION -->
@@ -182,7 +184,7 @@
         </svg>
     </a>
 
-    <!-- SCRIPT FOR TOGGLE TRANSLATION -->
+    <!-- TOGGLE SCRIPT -->
     <script type="text/javascript">
       function googleTranslateElementInit() {
         new google.translate.TranslateElement({
@@ -206,7 +208,8 @@
             btn.innerText = 'தமிழ்';
           }
         } else {
-          alert('Translate engine loading... Please click again in 2 seconds!');
+          // If script delay, trigger again
+          setTimeout(toggleTamil, 500);
         }
       }
     </script>
