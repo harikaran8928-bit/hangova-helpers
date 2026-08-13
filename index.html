@@ -18,7 +18,8 @@
 
         /* 3-SECOND AESTHETIC INTRO ANIMATION */
         .intro-bg {
-            background-image: url('download (1).jpg');
+            background-color: #0b0d14;
+            background-image: radial-gradient(circle at center, rgba(255, 46, 147, 0.3) 0%, rgba(11, 13, 20, 0.95) 70%);
             background-size: cover;
             background-position: center;
             animation: moveBg 3.5s ease-in-out infinite alternate;
@@ -70,16 +71,16 @@
         }
 
         @keyframes fadeOutIntro {
-            to { opacity: 0; visibility: hidden; pointer-events: none; }
+            to { opacity: 0; visibility: hidden; pointer-events: none; display: none !important; }
         }
     </style>
 </head>
 <body class="antialiased selection:bg-pink-500 selection:text-white">
 
     <!-- 3-SECOND PEN-WRITE AESTHETIC INTRO OVERLAY -->
-    <div id="introPreloader" class="fixed inset-0 z-[100] flex items-center justify-center bg-black overflow-hidden">
-        <div class="absolute inset-0 intro-bg opacity-75"></div>
-        <div class="absolute inset-0 bg-black/50 backdrop-blur-[2px]"></div>
+    <div id="introPreloader" class="fixed inset-0 z-[100] flex items-center justify-center bg-black overflow-hidden pointer-events-none">
+        <div class="absolute inset-0 intro-bg opacity-85"></div>
+        <div class="absolute inset-0 bg-black/40 backdrop-blur-[2px]"></div>
         <div class="relative z-10 text-center px-4">
             <p class="welcome-sub text-xs md:text-sm text-pink-300 font-bold uppercase mb-2">
                 Welcome To
@@ -94,7 +95,7 @@
     </div>
 
     <!-- NAVBAR WITH TAMIL TOGGLE & ADMIN LINK -->
-    <nav class="flex justify-between items-center px-6 py-4 border-b border-gray-800 bg-gray-950/80 backdrop-blur-md fixed w-full top-0 z-50">
+    <nav class="flex justify-between items-center px-6 py-4 border-b border-gray-800 bg-gray-950/80 backdrop-blur-md fixed w-full top-0 z-40">
       <div class="text-2xl font-black tracking-wider neon-text">
         HANGOVA HELPERS
       </div>
@@ -165,7 +166,7 @@
         </div>
     </section>
 
-    <!-- SERVICES (STEP 1: USER CLICKS "ORDER THIS PLAN") -->
+    <!-- SERVICES -->
     <section id="services" class="py-16 px-6 max-w-5xl mx-auto">
         <h2 id="plan-title" class="text-3xl font-extrabold text-center mb-4">Choose Your <span class="neon-text">Rescue Plan</span></h2>
         <p id="plan-subtitle" class="text-center text-gray-400 mb-12">Click "Order This Plan" to open the submission form.</p>
@@ -214,7 +215,7 @@
         </div>
     </section>
 
-    <!-- STEP 2: DETAILS POPUP FORM (SUBMIT ORDER DIRECTLY HERE) -->
+    <!-- STEP 2: DETAILS POPUP FORM -->
     <div id="detailsModal" class="hidden fixed inset-0 bg-black/95 z-50 p-4 flex items-center justify-center overflow-y-auto">
         <div class="max-w-xl w-full bg-gray-900 border border-pink-500/50 rounded-3xl p-6 md:p-8 shadow-2xl relative">
             <button onclick="closeDetailsModal()" class="absolute top-6 right-6 text-gray-400 hover:text-white font-black text-xl bg-gray-800 px-3 py-1 rounded-full">✕</button>
@@ -245,7 +246,7 @@
         </div>
     </div>
 
-    <!-- STEP 3: PAYMENT POPUP MODAL (SHOWS QR CODE ONLY NOW) -->
+    <!-- STEP 3: PAYMENT POPUP MODAL -->
     <div id="paymentModal" class="hidden fixed inset-0 bg-black/95 z-50 p-4 flex items-center justify-center overflow-y-auto">
         <div class="max-w-md w-full bg-gray-900 border border-pink-500 rounded-3xl p-6 md:p-8 shadow-2xl relative text-center">
             <button onclick="closePaymentModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white font-black text-xl bg-gray-800 px-3 py-1 rounded-full">✕</button>
@@ -257,7 +258,6 @@
             <h3 class="text-2xl font-black neon-text mb-1" id="checkoutPlanTitle">Selected Plan</h3>
             <p class="text-3xl font-extrabold text-white mb-4" id="checkoutPlanPrice">₹60</p>
 
-            <!-- UPI PAYMENT BOX -->
             <div class="bg-gray-950 border border-gray-800 p-4 rounded-2xl space-y-3 mb-6">
                 <p class="text-xs font-bold text-gray-300 uppercase tracking-wider">Scan via GPay / PhonePe / Paytm / BHIM</p>
                 
@@ -350,7 +350,12 @@
       let selectedPlanPrice = 0;
       let pendingOrderData = null;
 
-      // STEP 1: TRIGGER DETAILS MODAL WHEN USER CLICKS "ORDER THIS PLAN"
+      // Automatically remove preloader after 3.5 seconds
+      setTimeout(() => {
+        const preloader = document.getElementById('introPreloader');
+        if (preloader) preloader.style.display = 'none';
+      }, 3500);
+
       function triggerOrderForm(planName, price) {
         selectedPlanName = planName;
         selectedPlanPrice = price;
@@ -362,7 +367,6 @@
         document.getElementById('detailsModal').classList.add('hidden');
       }
 
-      // STEP 2: GO TO PAYMENT SCREEN WITH DYNAMIC QR
       function goToPaymentStep(e) {
         e.preventDefault();
 
@@ -374,11 +378,9 @@
 
         closeDetailsModal();
 
-        // Update Checkout Popup Info
         document.getElementById('checkoutPlanTitle').innerText = selectedPlanName;
         document.getElementById('checkoutPlanPrice').innerText = '₹' + selectedPlanPrice;
 
-        // Generate Dynamic UPI QR Code
         const upiUrl = `upi://pay?pa=scasharikaran@okaxis&pn=HangovaHelpers&am=${selectedPlanPrice}&cu=INR`;
         document.getElementById('upiQrImage').src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(upiUrl)}`;
 
@@ -389,7 +391,6 @@
         document.getElementById('paymentModal').classList.add('hidden');
       }
 
-      // STEP 3: FINAL SUBMIT TO SUPABASE
       async function finalSubmitOrder() {
         if (!pendingOrderData) return;
 
