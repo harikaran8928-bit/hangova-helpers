@@ -6,7 +6,10 @@
     <title>HANGOVA HELPERS | Your Ultimate Chat & Dating Wingman</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&display=swap" rel="stylesheet">
+    
+    <!-- Aesthetic Cursive Signature Font & Modern Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
+    
     <style>
         body { background-color: #0b0d14; color: #ffffff; font-family: system-ui, -apple-system, sans-serif; }
         .neon-border { border: 1px solid #ff2e93; box-shadow: 0 0 15px rgba(255, 46, 147, 0.2); }
@@ -19,28 +22,58 @@
             box-shadow: 0 0 15px rgba(255, 46, 147, 0.5);
         }
 
-        /* 3-SECOND INTRO PRELOADER ANIMATION */
+        /* 3-SECOND AESTHETIC INTRO ANIMATION */
         .intro-bg {
             background-image: url('download (1).jpg');
             background-size: cover;
             background-position: center;
-            animation: moveBg 3s ease-in-out infinite alternate;
+            animation: moveBg 3.5s ease-in-out infinite alternate;
         }
 
         @keyframes moveBg {
             0% { transform: scale(1); filter: brightness(0.8) contrast(1.1); }
-            100% { transform: scale(1.1); filter: brightness(1) contrast(1.3); }
+            100% { transform: scale(1.12); filter: brightness(1) contrast(1.3); }
         }
 
-        .red-neon-title {
-            font-family: 'Orbitron', sans-serif;
-            color: #ff003c;
-            text-shadow: 0 0 15px #ff003c, 0 0 30px #ff003c, 0 0 60px #ff0055;
-            letter-spacing: 5px;
+        /* HANDWRITTEN SCRIPT PEN-WRITE ANIMATION */
+        .handwritten-font {
+            font-family: 'Great Vibes', cursive;
+            background: linear-gradient(90deg, #ff0055, #ff2e93, #ff8a00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 15px rgba(255, 0, 85, 0.8));
+            display: inline-block;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 3px solid #ff0055;
+            width: 0;
+            animation: writeText 2.2s steps(30, end) forwards, blinkCursor 0.6s infinite alternate;
+        }
+
+        @keyframes writeText {
+            0% { width: 0; }
+            80% { width: 100%; border-right-color: #ff0055; }
+            100% { width: 100%; border-right-color: transparent; }
+        }
+
+        @keyframes blinkCursor {
+            from { border-right-color: #ff0055; }
+            to { border-right-color: transparent; }
+        }
+
+        .welcome-sub {
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: 6px;
+            opacity: 0;
+            animation: fadeInSub 0.8s ease 1.5s forwards;
+        }
+
+        @keyframes fadeInSub {
+            to { opacity: 1; }
         }
 
         #introPreloader {
-            animation: fadeOutIntro 0.8s ease 3s forwards;
+            animation: fadeOutIntro 0.8s ease 3.2s forwards;
         }
 
         @keyframes fadeOutIntro {
@@ -50,16 +83,19 @@
 </head>
 <body class="antialiased selection:bg-pink-500 selection:text-white">
 
-    <!-- 3-SECOND AESTHETIC INTRO OVERLAY -->
+    <!-- 3-SECOND PEN-WRITE AESTHETIC INTRO OVERLAY -->
     <div id="introPreloader" class="fixed inset-0 z-[100] flex items-center justify-center bg-black overflow-hidden">
         <div class="absolute inset-0 intro-bg opacity-75"></div>
-        <div class="absolute inset-0 bg-black/40 backdrop-blur-[2px]"></div>
-        <div class="relative z-10 text-center px-4 animate-pulse">
-            <h1 class="text-3xl md:text-6xl font-black red-neon-title uppercase tracking-widest leading-tight">
-                WELCOME TO HANGOVA
+        <div class="absolute inset-0 bg-black/50 backdrop-blur-[2px]"></div>
+        <div class="relative z-10 text-center px-4">
+            <p class="welcome-sub text-xs md:text-sm text-pink-300 font-bold uppercase mb-2">
+                Welcome To
+            </p>
+            <h1 class="text-6xl md:text-9xl handwritten-font py-2">
+                Hangova
             </h1>
-            <p class="text-xs md:text-sm text-pink-200 tracking-[0.4em] mt-4 font-bold uppercase opacity-90">
-                Ultimate Chat & Dating Wingman
+            <p class="welcome-sub text-[10px] md:text-xs text-gray-300 tracking-[0.5em] mt-3 uppercase opacity-80">
+                Ultimate Chat & Dating Rescue
             </p>
         </div>
     </div>
