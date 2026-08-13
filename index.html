@@ -141,9 +141,14 @@
             <p id="form-sub" class="text-center text-gray-400 text-sm mb-8">No personal numbers required. 100% Encrypted & Private Submission.</p>
 
             <form onsubmit="handleOrderSubmit(event)" class="space-y-6">
+                <!-- DROPDOWN SELECT FOR PLAN -->
                 <div>
-                    <label class="block text-xs font-bold text-pink-400 uppercase tracking-wider mb-2">Selected Plan</label>
-                    <input type="text" id="selected-plan" readonly value="Pro Wingman (₹60)" class="w-full bg-gray-950 border border-pink-500/50 rounded-xl px-4 py-3 text-pink-300 font-bold focus:outline-none">
+                    <label class="block text-xs font-bold text-pink-400 uppercase tracking-wider mb-2">Select Your Plan</label>
+                    <select id="selected-plan" class="w-full bg-gray-950 border border-pink-500/50 rounded-xl px-4 py-3 text-pink-300 font-bold focus:outline-none cursor-pointer">
+                        <option value="Single Chat Rescue (₹20)">Single Chat Rescue (₹20)</option>
+                        <option value="Pro Wingman (₹60)" selected>Pro Wingman (₹60)</option>
+                        <option value="1-on-1 Call Strategy (₹100)">1-on-1 Call Strategy (₹100)</option>
+                    </select>
                 </div>
 
                 <div class="grid md:grid-cols-2 gap-4">
