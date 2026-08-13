@@ -21,7 +21,7 @@
 </head>
 <body class="antialiased selection:bg-pink-500 selection:text-white">
 
-    <!-- NAVBAR WITH TAMIL TOGGLE -->
+    <!-- NAVBAR WITH TAMIL TOGGLE & ADMIN LINK -->
     <nav class="flex justify-between items-center px-6 py-4 border-b border-gray-800 bg-gray-950/80 backdrop-blur-md fixed w-full top-0 z-50">
       <div class="text-2xl font-black tracking-wider neon-text">
         HANGOVA HELPERS
@@ -30,7 +30,9 @@
         <a href="index.html" class="text-pink-400">Home</a>
         <a href="#services" class="hover:text-pink-400 transition">Services</a>
         <a href="#order-form" class="hover:text-pink-400 transition">Order Direct</a>
-        <a href="admin.html" class="text-gray-400 hover:text-white transition">Admin</a>
+        <button onclick="openAdminModal()" class="text-xs bg-gray-800 hover:bg-pink-600 text-gray-300 px-3 py-1.5 rounded-full transition cursor-pointer">
+          👑 Admin
+        </button>
         <button onclick="toggleLanguage()" id="langBtn" class="bg-pink-600 hover:bg-pink-700 text-white font-bold text-xs px-3 py-1.5 rounded-full transition cursor-pointer">
           தமிழ்
         </button>
@@ -199,6 +201,54 @@
         </div>
     </section>
 
+    <!-- ADMIN MODAL OVERLAY (POPUP) -->
+    <div id="adminModal" class="hidden fixed inset-0 bg-black/95 z-50 p-4 overflow-y-auto">
+        <div class="max-w-6xl mx-auto my-10 bg-gray-900 border border-pink-500/50 rounded-3xl p-6 md:p-8 shadow-2xl relative">
+            <button onclick="closeAdminModal()" class="absolute top-6 right-6 text-gray-400 hover:text-white font-black text-xl bg-gray-800 px-3 py-1 rounded-full">✕</button>
+            
+            <!-- PASSCODE PROMPT -->
+            <div id="adminAuthBox" class="text-center py-10">
+                <h2 class="text-3xl font-black neon-text mb-2">ADMIN LOGIN</h2>
+                <p class="text-xs text-gray-400 mb-6">Enter secret passcode to access customer responses.</p>
+                <input type="password" id="adminPassInput" placeholder="Enter Admin Passcode" class="w-72 bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-white mb-4 focus:border-pink-500 focus:outline-none text-center font-bold">
+                <br>
+                <button onclick="checkAdminPass()" class="neon-btn text-white font-bold px-8 py-3 rounded-xl hover:opacity-90 transition cursor-pointer">Login to Dashboard</button>
+            </div>
+
+            <!-- DASHBOARD DATA (HIDDEN UNTIL LOGIN) -->
+            <div id="adminDataBox" class="hidden">
+                <div class="flex justify-between items-center mb-6 border-b border-gray-800 pb-4">
+                    <div>
+                        <h2 class="text-2xl font-black neon-text">HANGOVA HELPERS RESPONSES</h2>
+                        <p class="text-xs text-gray-400">Live Customer Requests from Supabase Database</p>
+                    </div>
+                    <button onclick="fetchOrdersData()" class="bg-pink-600 hover:bg-pink-700 text-white font-bold text-xs px-4 py-2 rounded-xl transition cursor-pointer">🔄 Refresh Responses</button>
+                </div>
+
+                <div class="overflow-x-auto bg-gray-950 border border-gray-800 rounded-2xl shadow-xl">
+                    <table class="w-full text-left text-sm text-gray-300">
+                        <thead class="bg-gray-900 text-pink-400 uppercase text-xs tracking-wider border-b border-gray-800">
+                            <tr>
+                                <th class="py-4 px-6">ID</th>
+                                <th class="py-4 px-6">Date</th>
+                                <th class="py-4 px-6">Customer</th>
+                                <th class="py-4 px-6">Handle</th>
+                                <th class="py-4 px-6">Plan</th>
+                                <th class="py-4 px-6">Context</th>
+                                <th class="py-4 px-6">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ordersTableBody" class="divide-y divide-gray-800 text-xs">
+                            <tr>
+                                <td colspan="7" class="py-8 text-center text-gray-500">Loading responses...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- FOOTER -->
     <footer class="border-t border-gray-800 py-8 px-6 text-center text-xs text-gray-500">
         <p class="mb-2">© 2026 HANGOVA HELPERS. All Rights Reserved.</p>
@@ -243,6 +293,67 @@
       function selectPlan(planId) {
         document.getElementById(planId).checked = true;
         document.getElementById('order-form').scrollIntoView({ behavior: 'smooth' });
+      }
+
+      /* ADMIN MODAL LOGIC */
+      function openAdminModal() {
+        document.getElementById('adminModal').classList.remove('hidden');
+      }
+
+      function closeAdminModal() {
+        document.getElementById('adminModal').classList.add('hidden');
+      }
+
+      function checkAdminPass() {
+        const input = document.getElementById('adminPassInput').value;
+        if (input === 'admin123') {
+          document.getElementById('adminAuthBox').classList.add('hidden');
+          document.getElementById('adminDataBox').classList.remove('hidden');
+          fetchOrdersData();
+        } else {
+          alert('Wrong Passcode machan!');
+        }
+      }
+
+      async function fetchOrdersData() {
+        const { data, error } = await _supabase
+          .from('orders')
+          .select('*')
+          .order('id', { ascending: false });
+
+        const table = document.getElementById('ordersTableBody');
+        if (error) {
+          table.innerHTML = `<tr><td colspan="7" class="py-4 text-center text-red-500">Error: ${error.message}</td></tr>`;
+          return;
+        }
+
+        if (!data || data.length === 0) {
+          table.innerHTML = `<tr><td colspan="7" class="py-8 text-center text-gray-500">No customer orders submitted yet.</td></tr>`;
+          return;
+        }
+
+        table.innerHTML = data.map(order => `
+          <tr class="hover:bg-gray-800/50 transition">
+            <td class="py-4 px-6 font-bold text-pink-400">#${order.id}</td>
+            <td class="py-4 px-6 text-gray-400">${new Date(order.created_at).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</td>
+            <td class="py-4 px-6 font-bold text-white">${order.customer_name}</td>
+            <td class="py-4 px-6 text-pink-300 font-mono">${order.contact_handle}</td>
+            <td class="py-4 px-6"><span class="bg-pink-950 text-pink-400 border border-pink-800 px-2 py-1 rounded-md text-[10px] font-bold">${order.plan}</span></td>
+            <td class="py-4 px-6 max-w-xs truncate text-gray-300" title="${order.situation_context}">${order.situation_context}</td>
+            <td class="py-4 px-6">
+              <select onchange="updateStatus(${order.id}, this.value)" class="bg-gray-900 border border-gray-700 text-xs rounded-lg px-2 py-1 text-white font-bold cursor-pointer">
+                <option value="Pending" ${order.status === 'Pending' ? 'selected' : ''}>🟡 Pending</option>
+                <option value="In Progress" ${order.status === 'In Progress' ? 'selected' : ''}>🔵 In Progress</option>
+                <option value="Completed" ${order.status === 'Completed' ? 'selected' : ''}>🟢 Completed</option>
+              </select>
+            </td>
+          </tr>
+        `).join('');
+      }
+
+      async function updateStatus(id, newStatus) {
+        await _supabase.from('orders').update({ status: newStatus }).eq('id', id);
+        alert('Status updated successfully!');
       }
 
       function toggleLanguage() {
