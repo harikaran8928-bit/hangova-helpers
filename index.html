@@ -10,6 +10,14 @@
         .neon-border { border: 1px solid #ff2e93; box-shadow: 0 0 15px rgba(255, 46, 147, 0.2); }
         .neon-btn { background: linear-gradient(90deg, #ff2e93, #ff8a00); }
         .neon-text { background: linear-gradient(90deg, #ff2e93, #ff8a00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        /* PLAN RADIO SELECTION STYLES */
+        .plan-radio:checked + label {
+            background: linear-gradient(90deg, #ff2e93, #ff8a00) !important;
+            border-color: #ff2e93 !important;
+            color: #ffffff !important;
+            box-shadow: 0 0 15px rgba(255, 46, 147, 0.5);
+        }
     </style>
 </head>
 <body class="antialiased selection:bg-pink-500 selection:text-white">
@@ -55,6 +63,16 @@
                 How It Works
             </a>
         </div>
+
+        <!-- SAFETY & REFUND GUARANTEE HIGHLIGHT -->
+        <div class="neon-border bg-gray-900/60 rounded-2xl p-5 text-left max-w-xl mx-auto text-xs text-gray-300">
+            <p id="policy-title" class="font-bold text-pink-400 text-sm mb-2">🛡️ Official Terms & Refund Guarantee:</p>
+            <ul class="list-disc pl-4 space-y-1.5 text-gray-400">
+                <li id="policy-1">Only officially assigned HANGOVA HELPERS staff will process your request.</li>
+                <li id="policy-2"><b>70% Refund Policy:</b> If we are unable to fulfill or process your requested work, <b>70% of the amount will be refunded</b> immediately.</li>
+                <li id="policy-3"><b>100% Privacy:</b> Screenshots are strictly confidential & permanently deleted post-session.</li>
+            </ul>
+        </div>
     </section>
 
     <!-- HOW IT WORKS -->
@@ -99,7 +117,7 @@
                         <li id="p1-f3">✓ Response within 30 mins</li>
                     </ul>
                 </div>
-                <button onclick="selectPlan('Single Chat Rescue (₹20)')" class="block w-full text-center bg-gray-800 hover:bg-gray-700 text-white font-bold py-3 rounded-xl transition cursor-pointer">Order This Plan</button>
+                <button onclick="selectPlan('plan20')" class="block w-full text-center bg-gray-800 hover:bg-gray-700 text-white font-bold py-3 rounded-xl transition cursor-pointer">Order This Plan</button>
             </div>
 
             <!-- Pro Plan (Popular) -->
@@ -115,7 +133,7 @@
                         <li id="p2-f4">✓ Assigned Helper Guidance</li>
                     </ul>
                 </div>
-                <button onclick="selectPlan('Pro Wingman (₹60)')" class="block w-full text-center neon-btn text-white font-bold py-3 rounded-xl transition cursor-pointer">Order This Plan</button>
+                <button onclick="selectPlan('plan60')" class="block w-full text-center neon-btn text-white font-bold py-3 rounded-xl transition cursor-pointer">Order This Plan</button>
             </div>
 
             <!-- Strategy Call -->
@@ -129,7 +147,7 @@
                         <li id="p3-f3">✓ Customized Action Plan</li>
                     </ul>
                 </div>
-                <button onclick="selectPlan('1-on-1 Call Strategy (₹100)')" class="block w-full text-center bg-gray-800 hover:bg-gray-700 text-white font-bold py-3 rounded-xl transition cursor-pointer">Order This Plan</button>
+                <button onclick="selectPlan('plan100')" class="block w-full text-center bg-gray-800 hover:bg-gray-700 text-white font-bold py-3 rounded-xl transition cursor-pointer">Order This Plan</button>
             </div>
         </div>
     </section>
@@ -141,14 +159,29 @@
             <p id="form-sub" class="text-center text-gray-400 text-sm mb-8">No personal numbers required. 100% Encrypted & Private Submission.</p>
 
             <form onsubmit="handleOrderSubmit(event)" class="space-y-6">
-                <!-- DROPDOWN SELECT FOR PLAN -->
+                <!-- VISUAL PLAN SELECTION BUTTONS -->
                 <div>
-                    <label class="block text-xs font-bold text-pink-400 uppercase tracking-wider mb-2">Select Your Plan</label>
-                    <select id="selected-plan" class="w-full bg-gray-950 border border-pink-500/50 rounded-xl px-4 py-3 text-pink-300 font-bold focus:outline-none cursor-pointer">
-                        <option value="Single Chat Rescue (₹20)">Single Chat Rescue (₹20)</option>
-                        <option value="Pro Wingman (₹60)" selected>Pro Wingman (₹60)</option>
-                        <option value="1-on-1 Call Strategy (₹100)">1-on-1 Call Strategy (₹100)</option>
-                    </select>
+                    <label class="block text-xs font-bold text-pink-400 uppercase tracking-wider mb-3">Select Plan (Click to Choose)</label>
+                    <div class="grid grid-cols-3 gap-3">
+                        <div>
+                            <input type="radio" id="plan20" name="plan_choice" value="Single Chat Rescue (₹20)" class="hidden plan-radio">
+                            <label for="plan20" class="block text-center bg-gray-950 border border-gray-800 rounded-xl py-3 px-2 text-xs md:text-sm font-bold text-gray-300 cursor-pointer transition">
+                                ₹20<br><span class="text-[10px] font-normal opacity-80">Single Chat</span>
+                            </label>
+                        </div>
+                        <div>
+                            <input type="radio" id="plan60" name="plan_choice" value="Pro Wingman (₹60)" class="hidden plan-radio" checked>
+                            <label for="plan60" class="block text-center bg-gray-950 border border-gray-800 rounded-xl py-3 px-2 text-xs md:text-sm font-bold text-gray-300 cursor-pointer transition">
+                                ₹60 🔥<br><span class="text-[10px] font-normal opacity-80">Pro Wingman</span>
+                            </label>
+                        </div>
+                        <div>
+                            <input type="radio" id="plan100" name="plan_choice" value="1-on-1 Call Strategy (₹100)" class="hidden plan-radio">
+                            <label for="plan100" class="block text-center bg-gray-950 border border-gray-800 rounded-xl py-3 px-2 text-xs md:text-sm font-bold text-gray-300 cursor-pointer transition">
+                                ₹100<br><span class="text-[10px] font-normal opacity-80">1-on-1 Call</span>
+                            </label>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="grid md:grid-cols-2 gap-4">
@@ -186,10 +219,10 @@
     <!-- FOOTER -->
     <footer class="border-t border-gray-800 py-8 px-6 text-center text-xs text-gray-500">
         <p class="mb-2">© 2026 HANGOVA HELPERS. All Rights Reserved.</p>
-        <p>Official Terms: All communication assistance is handled strictly by assigned Hangova Helpers representatives for guidance purposes only.</p>
+        <p id="footer-terms">Official Terms: All communication assistance is handled strictly by assigned Hangova Helpers representatives for guidance purposes only. In case we are unable to process or fulfill your request, <b>70% of the amount will be refunded</b>.</p>
     </footer>
 
-    <!-- INSTANT TAMIL TOGGLE & ORDER SCRIPT -->
+    <!-- SCRIPT FOR SELECTION & TRANSLATION -->
     <script>
       let currentLang = 'en';
 
@@ -199,6 +232,10 @@
         'hero-desc': 'ரிப்ளை வராமல் ஏமாறாதீர்கள்! உங்கள் சாட் ஸ்கிரீன்ஷாட்களை நேரடியாக இணையதளத்தில் பதிவேற்றி, எங்களின் வல்லுநர்களிடம் இருந்து சிறந்த பதில்களைப் பெறுங்கள்.',
         'btn-rescue': '🚀 நேரடி உதவி பெற',
         'btn-how': 'இது எவ்வாறு இயங்குகிறது',
+        'policy-title': '🛡️ அதிகாரப்பூர்வ விதிகள் & பணத்தைத் திரும்பப்பெறும் உத்தரவாதம்:',
+        'policy-1': 'நியமிக்கப்பட்ட HANGOVA HELPERS பணியாளர்கள் மட்டுமே உங்கள் கோரிக்கையைச் செயல்படுத்துவார்கள்.',
+        'policy-2': '<b>70% பணத்தைத் திரும்பப்பெறும் கொள்கை:</b> எங்களால் உங்கள் கோரிக்கையைச் செய்ய முடியாவிட்டால், <b>செலுத்திய தொகையில் 70% உடனடியாகத் திரும்ப அளிக்கப்படும்</b>.',
+        'policy-3': '<b>100% தனியுரிமை:</b> ஸ்கிரீன்ஷாட்கள் இரகசியமாக வைக்கப்பட்டு உடனடியாக அழிக்கப்படும்.',
         'how-title': 'இது எவ்வாறு இயங்குகிறது <span class="neon-text">(3 எளிய படிகள்)</span>',
         'step1-h': 'திட்டம் தேர்வு & பதிவேற்றம்',
         'step1-p': 'உங்கள் திட்டத்தைத் தேர்ந்தெடுத்து சாட் ஸ்கிரீன்ஷாட்களை எங்கள் போர்ட்டலில் பாதுகாப்பாகப் பதிவேற்றுங்கள்.',
@@ -223,7 +260,8 @@
         'p3-f2': '✓ மனநிலை மற்றும் தகவல் தொடர்பு பயிற்சி',
         'p3-f3': '✓ தனிப்பயனாக்கப்பட்ட செயல் திட்டம்',
         'form-heading': 'ஆர்டரை <span class="neon-text">நேரடியாக சமர்ப்பிக்கவும்</span>',
-        'form-sub': 'தனிப்பட்ட எண்கள் தேவையில்லை. 100% பாதுகாப்பான சமர்ப்பிப்பு.'
+        'form-sub': 'தனிப்பட்ட எண்கள் தேவையில்லை. 100% பாதுகாப்பான சமர்ப்பிப்பு.',
+        'footer-terms': 'அதிகாரப்பூர்வ விதிகள்: அனைத்து தகவல்தொடர்பு உதவிகளும் வழிகாட்டுதல் நோக்கங்களுக்காக மட்டுமே. எங்களால் உங்கள் கோரிக்கையைச் செயல்படுத்த முடியாவிட்டால், 70% தொகை உடனடியாகத் திரும்ப வழங்கப்படும்.'
       };
 
       const enText = {
@@ -232,6 +270,10 @@
         'hero-desc': "Don't get ghosted! Upload your chat screenshots, get high-converting text scripts & strategic dating advice from our assigned experts directly on-site.",
         'btn-rescue': '🚀 Rescue My Chat Directly',
         'btn-how': 'How It Works',
+        'policy-title': '🛡️ Official Terms & Refund Guarantee:',
+        'policy-1': 'Only officially assigned HANGOVA HELPERS staff will process your request.',
+        'policy-2': '<b>70% Refund Policy:</b> If we are unable to fulfill or process your requested work, <b>70% of the amount will be refunded</b> immediately.',
+        'policy-3': '<b>100% Privacy:</b> Screenshots are strictly confidential & permanently deleted post-session.',
         'how-title': 'How It Works <span class="neon-text">(3 Simple Steps)</span>',
         'step1-h': 'Select Plan & Upload',
         'step1-p': 'Choose your plan and upload chat screenshots directly in our secure web portal.',
@@ -256,7 +298,8 @@
         'p3-f2': '✓ Mindset & Communication Coaching',
         'p3-f3': '✓ Customized Action Plan',
         'form-heading': 'Submit Order <span class="neon-text">Directly Here</span>',
-        'form-sub': 'No personal numbers required. 100% Encrypted & Private Submission.'
+        'form-sub': 'No personal numbers required. 100% Encrypted & Private Submission.',
+        'footer-terms': 'Official Terms: All communication assistance is handled strictly by assigned Hangova Helpers representatives for guidance purposes only. In case we are unable to process or fulfill your request, 70% of the amount will be refunded.'
       };
 
       function toggleLanguage() {
@@ -279,8 +322,8 @@
         }
       }
 
-      function selectPlan(planName) {
-        document.getElementById('selected-plan').value = planName;
+      function selectPlan(planId) {
+        document.getElementById(planId).checked = true;
         document.getElementById('order-form').scrollIntoView({ behavior: 'smooth' });
       }
 
@@ -288,6 +331,7 @@
         e.preventDefault();
         document.getElementById('success-msg').classList.remove('hidden');
         e.target.reset();
+        document.getElementById('plan60').checked = true;
       }
     </script>
 </body>
