@@ -41,7 +41,7 @@
             overflow: hidden;
             border-right: 3px solid #ff0055;
             width: 0;
-            animation: writeText 2.2s steps(30, end) forwards, blinkCursor 0.6s infinite alternate;
+            animation: writeText 2s steps(30, end) forwards;
         }
 
         @keyframes writeText {
@@ -50,35 +50,22 @@
             100% { width: 100%; border-right-color: transparent; }
         }
 
-        @keyframes blinkCursor {
-            from { border-right-color: #ff0055; }
-            to { border-right-color: transparent; }
-        }
-
         .welcome-sub {
             font-family: 'Montserrat', sans-serif;
             letter-spacing: 6px;
             opacity: 0;
-            animation: fadeInSub 0.8s ease 1.5s forwards;
+            animation: fadeInSub 0.8s ease 1.2s forwards;
         }
 
         @keyframes fadeInSub {
             to { opacity: 1; }
-        }
-
-        #introPreloader {
-            animation: fadeOutIntro 0.8s ease 3.2s forwards;
-        }
-
-        @keyframes fadeOutIntro {
-            to { opacity: 0; visibility: hidden; pointer-events: none; display: none !important; }
         }
     </style>
 </head>
 <body class="antialiased selection:bg-pink-500 selection:text-white">
 
     <!-- 3-SECOND PEN-WRITE AESTHETIC INTRO OVERLAY -->
-    <div id="introPreloader" class="fixed inset-0 z-[100] flex items-center justify-center bg-black overflow-hidden pointer-events-none">
+    <div id="introPreloader" class="fixed inset-0 z-[100] flex items-center justify-center bg-black overflow-hidden transition-opacity duration-700">
         <div class="absolute inset-0 intro-bg opacity-85"></div>
         <div class="absolute inset-0 bg-black/40 backdrop-blur-[2px]"></div>
         <div class="relative z-10 text-center px-4">
@@ -182,7 +169,7 @@
                         <li id="p1-f3">✓ Response within 30 mins</li>
                     </ul>
                 </div>
-                <button onclick="triggerOrderForm('Single Chat Rescue (₹20)', 20)" class="block w-full text-center bg-gray-800 hover:bg-gray-700 text-white font-bold py-3 rounded-xl transition cursor-pointer">Order This Plan</button>
+                <button onclick="triggerOrderForm('Single Chat Rescue (₹20)', 20)" class="block w-full text-center bg-gray-800 hover:bg-pink-600 text-white font-bold py-3 rounded-xl transition cursor-pointer">Order This Plan</button>
             </div>
 
             <div class="neon-border bg-gray-900 p-8 rounded-2xl relative flex flex-col justify-between">
@@ -210,7 +197,7 @@
                         <li id="p3-f3">✓ Customized Action Plan</li>
                     </ul>
                 </div>
-                <button onclick="triggerOrderForm('1-on-1 Call Strategy (₹100)', 100)" class="block w-full text-center bg-gray-800 hover:bg-gray-700 text-white font-bold py-3 rounded-xl transition cursor-pointer">Order This Plan</button>
+                <button onclick="triggerOrderForm('1-on-1 Call Strategy (₹100)', 100)" class="block w-full text-center bg-gray-800 hover:bg-pink-600 text-white font-bold py-3 rounded-xl transition cursor-pointer">Order This Plan</button>
             </div>
         </div>
     </section>
@@ -350,11 +337,14 @@
       let selectedPlanPrice = 0;
       let pendingOrderData = null;
 
-      // Automatically remove preloader after 3.5 seconds
+      // REMOVE PRELOADER COMPLETELY FROM DOM AFTER 2.8 SECONDS
       setTimeout(() => {
         const preloader = document.getElementById('introPreloader');
-        if (preloader) preloader.style.display = 'none';
-      }, 3500);
+        if (preloader) {
+          preloader.style.opacity = '0';
+          setTimeout(() => preloader.remove(), 700);
+        }
+      }, 2800);
 
       function triggerOrderForm(planName, price) {
         selectedPlanName = planName;
