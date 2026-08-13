@@ -15,12 +15,6 @@
         .neon-border { border: 1px solid #ff2e93; box-shadow: 0 0 15px rgba(255, 46, 147, 0.2); }
         .neon-btn { background: linear-gradient(90deg, #ff2e93, #ff8a00); }
         .neon-text { background: linear-gradient(90deg, #ff2e93, #ff8a00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .plan-radio:checked + label {
-            background: linear-gradient(90deg, #ff2e93, #ff8a00) !important;
-            border-color: #ff2e93 !important;
-            color: #ffffff !important;
-            box-shadow: 0 0 15px rgba(255, 46, 147, 0.5);
-        }
 
         /* 3-SECOND AESTHETIC INTRO ANIMATION */
         .intro-bg {
@@ -107,7 +101,6 @@
       <div class="flex items-center space-x-3 text-sm font-semibold">
         <a href="index.html" class="text-pink-400">Home</a>
         <a href="#services" class="hover:text-pink-400 transition">Services</a>
-        <a href="#order-form" class="hover:text-pink-400 transition">Order Direct</a>
         <button onclick="openAdminModal()" class="text-xs bg-gray-800 hover:bg-pink-600 text-gray-300 px-3 py-1.5 rounded-full transition cursor-pointer">
           👑 Admin
         </button>
@@ -130,8 +123,8 @@
             Don't get ghosted! Upload your chat screenshots, get high-converting text scripts & strategic dating advice from our assigned experts directly on-site.
         </p>
         <div class="flex flex-col sm:flex-row justify-center gap-4 mb-12">
-            <a href="#order-form" id="btn-rescue" class="neon-btn text-white font-bold text-lg px-8 py-4 rounded-xl shadow-lg hover:scale-105 transition transform">
-                🚀 Rescue My Chat Directly
+            <a href="#services" id="btn-rescue" class="neon-btn text-white font-bold text-lg px-8 py-4 rounded-xl shadow-lg hover:scale-105 transition transform">
+                🚀 View Plans & Order
             </a>
             <a href="#how" id="btn-how" class="bg-gray-800 hover:bg-gray-700 text-white font-semibold text-lg px-8 py-4 rounded-xl transition">
                 How It Works
@@ -155,27 +148,27 @@
             <div class="grid md:grid-cols-3 gap-8">
                 <div class="bg-gray-900/80 p-6 rounded-2xl border border-gray-800 text-center">
                     <div class="w-12 h-12 neon-btn flex items-center justify-center rounded-full text-white font-bold text-xl mx-auto mb-4">1</div>
-                    <h3 id="step1-h" class="text-xl font-bold mb-2">Select Plan & Details</h3>
-                    <p id="step1-p" class="text-gray-400 text-sm">Choose your package and submit your contact & chat context.</p>
+                    <h3 id="step1-h" class="text-xl font-bold mb-2">Click "Order This Plan"</h3>
+                    <p id="step1-p" class="text-gray-400 text-sm">Select your desired plan from the list below to begin.</p>
                 </div>
                 <div class="bg-gray-900/80 p-6 rounded-2xl border border-gray-800 text-center">
                     <div class="w-12 h-12 neon-btn flex items-center justify-center rounded-full text-white font-bold text-xl mx-auto mb-4">2</div>
-                    <h3 id="step2-h" class="text-xl font-bold mb-2">Scan & Pay QR</h3>
-                    <p id="step2-p" class="text-gray-400 text-sm">Proceed to the payment screen and scan the UPI QR code to confirm.</p>
+                    <h3 id="step2-h" class="text-xl font-bold mb-2">Submit Details Form</h3>
+                    <p id="step2-p" class="text-gray-400 text-sm">Provide your name, handle, and chat context in the popup screen.</p>
                 </div>
                 <div class="bg-gray-900/80 p-6 rounded-2xl border border-gray-800 text-center">
                     <div class="w-12 h-12 neon-btn flex items-center justify-center rounded-full text-white font-bold text-xl mx-auto mb-4">3</div>
-                    <h3 id="step3-h" class="text-xl font-bold mb-2">Receive Solution</h3>
-                    <p id="step3-p" class="text-gray-400 text-sm">Get custom scripts & advice directly delivered to your handle.</p>
+                    <h3 id="step3-h" class="text-xl font-bold mb-2">Scan & Pay QR</h3>
+                    <p id="step3-p" class="text-gray-400 text-sm">Proceed to the payment step and scan the UPI QR code to complete.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SERVICES -->
+    <!-- SERVICES (STEP 1: USER CLICKS "ORDER THIS PLAN") -->
     <section id="services" class="py-16 px-6 max-w-5xl mx-auto">
         <h2 id="plan-title" class="text-3xl font-extrabold text-center mb-4">Choose Your <span class="neon-text">Rescue Plan</span></h2>
-        <p id="plan-subtitle" class="text-center text-gray-400 mb-12">Special Launch Offer — Fast response guaranteed.</p>
+        <p id="plan-subtitle" class="text-center text-gray-400 mb-12">Click "Order This Plan" to open the submission form.</p>
 
         <div class="grid md:grid-cols-3 gap-8">
             <div class="bg-gray-900/50 border border-gray-800 p-8 rounded-2xl hover:border-pink-500/50 transition flex flex-col justify-between">
@@ -188,7 +181,7 @@
                         <li id="p1-f3">✓ Response within 30 mins</li>
                     </ul>
                 </div>
-                <button onclick="selectPlan('plan20')" class="block w-full text-center bg-gray-800 hover:bg-gray-700 text-white font-bold py-3 rounded-xl transition cursor-pointer">Order This Plan</button>
+                <button onclick="triggerOrderForm('Single Chat Rescue (₹20)', 20)" class="block w-full text-center bg-gray-800 hover:bg-gray-700 text-white font-bold py-3 rounded-xl transition cursor-pointer">Order This Plan</button>
             </div>
 
             <div class="neon-border bg-gray-900 p-8 rounded-2xl relative flex flex-col justify-between">
@@ -203,7 +196,7 @@
                         <li id="p2-f4">✓ Assigned Helper Guidance</li>
                     </ul>
                 </div>
-                <button onclick="selectPlan('plan60')" class="block w-full text-center neon-btn text-white font-bold py-3 rounded-xl transition cursor-pointer">Order This Plan</button>
+                <button onclick="triggerOrderForm('Pro Wingman (₹60)', 60)" class="block w-full text-center neon-btn text-white font-bold py-3 rounded-xl transition cursor-pointer">Order This Plan</button>
             </div>
 
             <div class="bg-gray-900/50 border border-gray-800 p-8 rounded-2xl hover:border-pink-500/50 transition flex flex-col justify-between">
@@ -216,53 +209,28 @@
                         <li id="p3-f3">✓ Customized Action Plan</li>
                     </ul>
                 </div>
-                <button onclick="selectPlan('plan100')" class="block w-full text-center bg-gray-800 hover:bg-gray-700 text-white font-bold py-3 rounded-xl transition cursor-pointer">Order This Plan</button>
+                <button onclick="triggerOrderForm('1-on-1 Call Strategy (₹100)', 100)" class="block w-full text-center bg-gray-800 hover:bg-gray-700 text-white font-bold py-3 rounded-xl transition cursor-pointer">Order This Plan</button>
             </div>
         </div>
     </section>
 
-    <!-- STEP 1: ORDER FORM (NO QR HERE) -->
-    <section id="order-form" class="py-16 px-6 max-w-3xl mx-auto">
-        <div class="neon-border bg-gray-900/90 rounded-3xl p-8 md:p-10 shadow-2xl">
-            <h2 id="form-heading" class="text-2xl md:text-4xl font-extrabold text-center mb-3">Submit Order <span class="neon-text">Directly Here</span></h2>
-            <p id="form-sub" class="text-center text-gray-400 text-sm mb-8">No personal numbers required. 100% Encrypted & Private Submission.</p>
+    <!-- STEP 2: DETAILS POPUP FORM (SUBMIT ORDER DIRECTLY HERE) -->
+    <div id="detailsModal" class="hidden fixed inset-0 bg-black/95 z-50 p-4 flex items-center justify-center overflow-y-auto">
+        <div class="max-w-xl w-full bg-gray-900 border border-pink-500/50 rounded-3xl p-6 md:p-8 shadow-2xl relative">
+            <button onclick="closeDetailsModal()" class="absolute top-6 right-6 text-gray-400 hover:text-white font-black text-xl bg-gray-800 px-3 py-1 rounded-full">✕</button>
 
-            <form id="orderForm" onsubmit="openPaymentModal(event)" class="space-y-6">
-                <!-- PLAN CHOICE -->
+            <h2 class="text-2xl md:text-3xl font-extrabold text-center mb-1">Submit Order <span class="neon-text">Directly Here</span></h2>
+            <p class="text-center text-pink-400 text-xs font-bold mb-6" id="selectedPlanLabel">Selected Plan: Pro Wingman (₹60)</p>
+
+            <form id="orderForm" onsubmit="goToPaymentStep(event)" class="space-y-4">
                 <div>
-                    <label class="block text-xs font-bold text-pink-400 uppercase tracking-wider mb-3">1. Select Plan (Click to Choose)</label>
-                    <div class="grid grid-cols-3 gap-3">
-                        <div>
-                            <input type="radio" id="plan20" name="plan_choice" value="Single Chat Rescue (₹20)" data-price="20" class="hidden plan-radio">
-                            <label for="plan20" class="block text-center bg-gray-950 border border-gray-800 rounded-xl py-3 px-2 text-xs md:text-sm font-bold text-gray-300 cursor-pointer transition">
-                                ₹20<br><span class="text-[10px] font-normal opacity-80">Single Chat</span>
-                            </label>
-                        </div>
-                        <div>
-                            <input type="radio" id="plan60" name="plan_choice" value="Pro Wingman (₹60)" data-price="60" class="hidden plan-radio" checked>
-                            <label for="plan60" class="block text-center bg-gray-950 border border-gray-800 rounded-xl py-3 px-2 text-xs md:text-sm font-bold text-gray-300 cursor-pointer transition">
-                                ₹60 🔥<br><span class="text-[10px] font-normal opacity-80">Pro Wingman</span>
-                            </label>
-                        </div>
-                        <div>
-                            <input type="radio" id="plan100" name="plan_choice" value="1-on-1 Call Strategy (₹100)" data-price="100" class="hidden plan-radio">
-                            <label for="plan100" class="block text-center bg-gray-950 border border-gray-800 rounded-xl py-3 px-2 text-xs md:text-sm font-bold text-gray-300 cursor-pointer transition">
-                                ₹100<br><span class="text-[10px] font-normal opacity-80">1-on-1 Call</span>
-                            </label>
-                        </div>
-                    </div>
+                    <label class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2">Your Name / Nickname</label>
+                    <input type="text" id="custName" required placeholder="e.g. Karan" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-white focus:border-pink-500 focus:outline-none">
                 </div>
 
-                <!-- USER DETAILS -->
-                <div class="grid md:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2">2. Your Name / Nickname</label>
-                        <input type="text" id="custName" required placeholder="e.g. Karan" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-white focus:border-pink-500 focus:outline-none">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2">Contact Preference (Instagram / Telegram ID)</label>
-                        <input type="text" id="custHandle" required placeholder="@your_handle or ID" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-white focus:border-pink-500 focus:outline-none">
-                    </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2">Contact Preference (Instagram / Telegram ID)</label>
+                    <input type="text" id="custHandle" required placeholder="@your_handle or ID" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-white focus:border-pink-500 focus:outline-none">
                 </div>
 
                 <div>
@@ -270,14 +238,14 @@
                     <textarea id="custContext" rows="3" required placeholder="Explain what happened or what reply you need..." class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-white focus:border-pink-500 focus:outline-none"></textarea>
                 </div>
 
-                <button type="submit" class="w-full neon-btn text-white font-extrabold text-lg py-4 rounded-xl shadow-lg hover:scale-[1.02] transition transform cursor-pointer">
+                <button type="submit" class="w-full neon-btn text-white font-extrabold text-lg py-4 rounded-xl shadow-lg hover:scale-[1.02] transition transform cursor-pointer mt-2">
                     Proceed to Payment ➡️
                 </button>
             </form>
         </div>
-    </section>
+    </div>
 
-    <!-- STEP 2: PAYMENT POPUP MODAL (SHOWS QR CODE ONLY AFTER SUBMIT) -->
+    <!-- STEP 3: PAYMENT POPUP MODAL (SHOWS QR CODE ONLY NOW) -->
     <div id="paymentModal" class="hidden fixed inset-0 bg-black/95 z-50 p-4 flex items-center justify-center overflow-y-auto">
         <div class="max-w-md w-full bg-gray-900 border border-pink-500 rounded-3xl p-6 md:p-8 shadow-2xl relative text-center">
             <button onclick="closePaymentModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white font-black text-xl bg-gray-800 px-3 py-1 rounded-full">✕</button>
@@ -378,31 +346,42 @@
       const _supabase = supabase.createClient(SUPABASE_URL, 'sb_publishable_8ETP_DR8lDc9Skl9spjupQ_cEXVb1');
 
       let currentLang = 'en';
+      let selectedPlanName = '';
+      let selectedPlanPrice = 0;
       let pendingOrderData = null;
 
-      // STEP 1: OPEN PAYMENT MODAL WITH DYNAMIC QR CODE
-      function openPaymentModal(e) {
+      // STEP 1: TRIGGER DETAILS MODAL WHEN USER CLICKS "ORDER THIS PLAN"
+      function triggerOrderForm(planName, price) {
+        selectedPlanName = planName;
+        selectedPlanPrice = price;
+        document.getElementById('selectedPlanLabel').innerText = 'Selected Plan: ' + planName;
+        document.getElementById('detailsModal').classList.remove('hidden');
+      }
+
+      function closeDetailsModal() {
+        document.getElementById('detailsModal').classList.add('hidden');
+      }
+
+      // STEP 2: GO TO PAYMENT SCREEN WITH DYNAMIC QR
+      function goToPaymentStep(e) {
         e.preventDefault();
 
-        const selectedPlanElement = document.querySelector('input[name="plan_choice"]:checked');
-        const planName = selectedPlanElement.value;
-        const planPrice = selectedPlanElement.getAttribute('data-price');
         const name = document.getElementById('custName').value;
         const handle = document.getElementById('custHandle').value;
         const context = document.getElementById('custContext').value;
 
-        // Store data temporarily for Step 2
-        pendingOrderData = { plan: planName, customer_name: name, contact_handle: handle, situation_context: context };
+        pendingOrderData = { plan: selectedPlanName, customer_name: name, contact_handle: handle, situation_context: context };
+
+        closeDetailsModal();
 
         // Update Checkout Popup Info
-        document.getElementById('checkoutPlanTitle').innerText = planName;
-        document.getElementById('checkoutPlanPrice').innerText = '₹' + planPrice;
+        document.getElementById('checkoutPlanTitle').innerText = selectedPlanName;
+        document.getElementById('checkoutPlanPrice').innerText = '₹' + selectedPlanPrice;
 
-        // Generate Dynamic UPI QR Code for Selected Price
-        const upiUrl = `upi://pay?pa=scasharikaran@okaxis&pn=HangovaHelpers&am=${planPrice}&cu=INR`;
+        // Generate Dynamic UPI QR Code
+        const upiUrl = `upi://pay?pa=scasharikaran@okaxis&pn=HangovaHelpers&am=${selectedPlanPrice}&cu=INR`;
         document.getElementById('upiQrImage').src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(upiUrl)}`;
 
-        // Show Modal
         document.getElementById('paymentModal').classList.remove('hidden');
       }
 
@@ -410,7 +389,7 @@
         document.getElementById('paymentModal').classList.add('hidden');
       }
 
-      // STEP 2: SAVE TO SUPABASE ON FINAL SUBMIT
+      // STEP 3: FINAL SUBMIT TO SUPABASE
       async function finalSubmitOrder() {
         if (!pendingOrderData) return;
 
@@ -429,7 +408,6 @@
         } else {
           closePaymentModal();
           document.getElementById('orderForm').reset();
-          document.getElementById('plan60').checked = true;
           document.getElementById('successModal').classList.remove('hidden');
           btn.innerText = '✅ I Have Paid & Submit Order';
           btn.disabled = false;
@@ -438,11 +416,6 @@
 
       function closeSuccessModal() {
         document.getElementById('successModal').classList.add('hidden');
-      }
-
-      function selectPlan(planId) {
-        document.getElementById(planId).checked = true;
-        document.getElementById('order-form').scrollIntoView({ behavior: 'smooth' });
       }
 
       function openAdminModal() {
