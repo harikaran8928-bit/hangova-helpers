@@ -35,7 +35,6 @@
             100% { transform: scale(1.12); filter: brightness(1) contrast(1.3); }
         }
 
-        /* HANDWRITTEN SCRIPT PEN-WRITE ANIMATION */
         .handwritten-font {
             font-family: 'Great Vibes', cursive;
             background: linear-gradient(90deg, #ff0055, #ff2e93, #ff8a00);
@@ -156,13 +155,13 @@
             <div class="grid md:grid-cols-3 gap-8">
                 <div class="bg-gray-900/80 p-6 rounded-2xl border border-gray-800 text-center">
                     <div class="w-12 h-12 neon-btn flex items-center justify-center rounded-full text-white font-bold text-xl mx-auto mb-4">1</div>
-                    <h3 id="step1-h" class="text-xl font-bold mb-2">Select Plan & Pay</h3>
-                    <p id="step1-p" class="text-gray-400 text-sm">Choose your plan and scan the GPay/UPI QR code to make payment.</p>
+                    <h3 id="step1-h" class="text-xl font-bold mb-2">Select Plan & Details</h3>
+                    <p id="step1-p" class="text-gray-400 text-sm">Choose your package and submit your contact & chat context.</p>
                 </div>
                 <div class="bg-gray-900/80 p-6 rounded-2xl border border-gray-800 text-center">
                     <div class="w-12 h-12 neon-btn flex items-center justify-center rounded-full text-white font-bold text-xl mx-auto mb-4">2</div>
-                    <h3 id="step2-h" class="text-xl font-bold mb-2">Expert Analysis</h3>
-                    <p id="step2-p" class="text-gray-400 text-sm">Our assigned wingman analyzes your screenshots and chat context.</p>
+                    <h3 id="step2-h" class="text-xl font-bold mb-2">Scan & Pay QR</h3>
+                    <p id="step2-p" class="text-gray-400 text-sm">Proceed to the payment screen and scan the UPI QR code to confirm.</p>
                 </div>
                 <div class="bg-gray-900/80 p-6 rounded-2xl border border-gray-800 text-center">
                     <div class="w-12 h-12 neon-btn flex items-center justify-center rounded-full text-white font-bold text-xl mx-auto mb-4">3</div>
@@ -222,31 +221,31 @@
         </div>
     </section>
 
-    <!-- ORDER FORM WITH UPI PAYMENT -->
+    <!-- STEP 1: ORDER FORM (NO QR HERE) -->
     <section id="order-form" class="py-16 px-6 max-w-3xl mx-auto">
         <div class="neon-border bg-gray-900/90 rounded-3xl p-8 md:p-10 shadow-2xl">
             <h2 id="form-heading" class="text-2xl md:text-4xl font-extrabold text-center mb-3">Submit Order <span class="neon-text">Directly Here</span></h2>
             <p id="form-sub" class="text-center text-gray-400 text-sm mb-8">No personal numbers required. 100% Encrypted & Private Submission.</p>
 
-            <form id="orderForm" onsubmit="handleOrderSubmit(event)" class="space-y-6">
+            <form id="orderForm" onsubmit="openPaymentModal(event)" class="space-y-6">
                 <!-- PLAN CHOICE -->
                 <div>
                     <label class="block text-xs font-bold text-pink-400 uppercase tracking-wider mb-3">1. Select Plan (Click to Choose)</label>
                     <div class="grid grid-cols-3 gap-3">
                         <div>
-                            <input type="radio" id="plan20" name="plan_choice" value="Single Chat Rescue (₹20)" class="hidden plan-radio">
+                            <input type="radio" id="plan20" name="plan_choice" value="Single Chat Rescue (₹20)" data-price="20" class="hidden plan-radio">
                             <label for="plan20" class="block text-center bg-gray-950 border border-gray-800 rounded-xl py-3 px-2 text-xs md:text-sm font-bold text-gray-300 cursor-pointer transition">
                                 ₹20<br><span class="text-[10px] font-normal opacity-80">Single Chat</span>
                             </label>
                         </div>
                         <div>
-                            <input type="radio" id="plan60" name="plan_choice" value="Pro Wingman (₹60)" class="hidden plan-radio" checked>
+                            <input type="radio" id="plan60" name="plan_choice" value="Pro Wingman (₹60)" data-price="60" class="hidden plan-radio" checked>
                             <label for="plan60" class="block text-center bg-gray-950 border border-gray-800 rounded-xl py-3 px-2 text-xs md:text-sm font-bold text-gray-300 cursor-pointer transition">
                                 ₹60 🔥<br><span class="text-[10px] font-normal opacity-80">Pro Wingman</span>
                             </label>
                         </div>
                         <div>
-                            <input type="radio" id="plan100" name="plan_choice" value="1-on-1 Call Strategy (₹100)" class="hidden plan-radio">
+                            <input type="radio" id="plan100" name="plan_choice" value="1-on-1 Call Strategy (₹100)" data-price="100" class="hidden plan-radio">
                             <label for="plan100" class="block text-center bg-gray-950 border border-gray-800 rounded-xl py-3 px-2 text-xs md:text-sm font-bold text-gray-300 cursor-pointer transition">
                                 ₹100<br><span class="text-[10px] font-normal opacity-80">1-on-1 Call</span>
                             </label>
@@ -254,23 +253,10 @@
                     </div>
                 </div>
 
-                <!-- UPI PAYMENT BOX -->
-                <div class="bg-gray-950 border border-pink-500/30 p-5 rounded-2xl text-center space-y-3">
-                    <p class="text-xs font-bold text-pink-400 uppercase tracking-wider">2. Scan & Pay via GPay / PhonePe / Paytm / BHIM</p>
-                    
-                    <div class="bg-gray-900 border border-gray-800 rounded-xl p-3 inline-block">
-                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=upi://pay?pa=scasharikaran@okaxis&pn=HangovaHelpers&cu=INR" alt="UPI Payment QR Code" class="w-40 h-40 mx-auto rounded-lg shadow-md">
-                    </div>
-
-                    <div class="text-xs text-gray-300">
-                        Official UPI ID: <span class="text-pink-400 font-mono font-bold bg-gray-900 px-3 py-1 rounded-md border border-gray-800 select-all">scasharikaran@okaxis</span>
-                    </div>
-                </div>
-
                 <!-- USER DETAILS -->
                 <div class="grid md:grid-cols-2 gap-4">
                     <div>
-                        <label class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2">3. Your Name / Nickname</label>
+                        <label class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2">2. Your Name / Nickname</label>
                         <input type="text" id="custName" required placeholder="e.g. Karan" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-white focus:border-pink-500 focus:outline-none">
                     </div>
                     <div>
@@ -284,16 +270,55 @@
                     <textarea id="custContext" rows="3" required placeholder="Explain what happened or what reply you need..." class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-white focus:border-pink-500 focus:outline-none"></textarea>
                 </div>
 
-                <button type="submit" id="submitBtn" class="w-full neon-btn text-white font-extrabold text-lg py-4 rounded-xl shadow-lg hover:scale-[1.02] transition transform cursor-pointer">
-                    🚀 Confirm Payment & Submit Order
+                <button type="submit" class="w-full neon-btn text-white font-extrabold text-lg py-4 rounded-xl shadow-lg hover:scale-[1.02] transition transform cursor-pointer">
+                    Proceed to Payment ➡️
                 </button>
             </form>
-
-            <div id="success-msg" class="hidden mt-6 bg-pink-950/80 border border-pink-500 text-pink-200 p-4 rounded-xl text-center text-sm font-semibold">
-                ✅ Order & Payment Confirmation Received! Our assigned expert is processing your context and will reach out to your handle shortly.
-            </div>
         </div>
     </section>
+
+    <!-- STEP 2: PAYMENT POPUP MODAL (SHOWS QR CODE ONLY AFTER SUBMIT) -->
+    <div id="paymentModal" class="hidden fixed inset-0 bg-black/95 z-50 p-4 flex items-center justify-center overflow-y-auto">
+        <div class="max-w-md w-full bg-gray-900 border border-pink-500 rounded-3xl p-6 md:p-8 shadow-2xl relative text-center">
+            <button onclick="closePaymentModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white font-black text-xl bg-gray-800 px-3 py-1 rounded-full">✕</button>
+
+            <span class="bg-pink-950 text-pink-400 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest border border-pink-800 inline-block mb-3">
+                Final Step: Scan & Confirm
+            </span>
+
+            <h3 class="text-2xl font-black neon-text mb-1" id="checkoutPlanTitle">Selected Plan</h3>
+            <p class="text-3xl font-extrabold text-white mb-4" id="checkoutPlanPrice">₹60</p>
+
+            <!-- UPI PAYMENT BOX -->
+            <div class="bg-gray-950 border border-gray-800 p-4 rounded-2xl space-y-3 mb-6">
+                <p class="text-xs font-bold text-gray-300 uppercase tracking-wider">Scan via GPay / PhonePe / Paytm / BHIM</p>
+                
+                <div class="bg-white p-3 rounded-xl inline-block shadow-lg">
+                    <img id="upiQrImage" src="" alt="UPI Payment QR Code" class="w-44 h-44 mx-auto rounded-md">
+                </div>
+
+                <div class="text-xs text-gray-300 pt-1">
+                    UPI ID: <span class="text-pink-400 font-mono font-bold bg-gray-900 px-2 py-1 rounded border border-gray-800 select-all">scasharikaran@okaxis</span>
+                </div>
+            </div>
+
+            <button onclick="finalSubmitOrder()" id="finalPayBtn" class="w-full neon-btn text-white font-extrabold text-lg py-4 rounded-xl shadow-lg hover:scale-[1.02] transition transform cursor-pointer">
+                ✅ I Have Paid & Submit Order
+            </button>
+        </div>
+    </div>
+
+    <!-- SUCCESS POPUP MODAL -->
+    <div id="successModal" class="hidden fixed inset-0 bg-black/95 z-50 p-4 flex items-center justify-center">
+        <div class="max-w-md w-full bg-gray-900 border border-green-500 rounded-3xl p-8 text-center shadow-2xl">
+            <div class="w-16 h-16 bg-green-500/20 text-green-400 border border-green-500 flex items-center justify-center rounded-full text-3xl font-bold mx-auto mb-4">✓</div>
+            <h3 class="text-2xl font-black text-white mb-2">Order Confirmed!</h3>
+            <p class="text-xs text-gray-300 mb-6 leading-relaxed">
+                Your payment and chat context have been saved. Our assigned expert will review it and reach out to your handle shortly!
+            </p>
+            <button onclick="closeSuccessModal()" class="w-full bg-gray-800 hover:bg-gray-700 text-white font-bold py-3 rounded-xl transition">Close</button>
+        </div>
+    </div>
 
     <!-- ADMIN MODAL OVERLAY -->
     <div id="adminModal" class="hidden fixed inset-0 bg-black/95 z-50 p-4 overflow-y-auto">
@@ -353,33 +378,66 @@
       const _supabase = supabase.createClient(SUPABASE_URL, 'sb_publishable_8ETP_DR8lDc9Skl9spjupQ_cEXVb1');
 
       let currentLang = 'en';
+      let pendingOrderData = null;
 
-      async function handleOrderSubmit(e) {
+      // STEP 1: OPEN PAYMENT MODAL WITH DYNAMIC QR CODE
+      function openPaymentModal(e) {
         e.preventDefault();
-        const submitBtn = document.getElementById('submitBtn');
-        submitBtn.innerText = 'Submitting...';
-        submitBtn.disabled = true;
 
-        const selectedPlan = document.querySelector('input[name="plan_choice"]:checked').value;
+        const selectedPlanElement = document.querySelector('input[name="plan_choice"]:checked');
+        const planName = selectedPlanElement.value;
+        const planPrice = selectedPlanElement.getAttribute('data-price');
         const name = document.getElementById('custName').value;
         const handle = document.getElementById('custHandle').value;
         const context = document.getElementById('custContext').value;
 
+        // Store data temporarily for Step 2
+        pendingOrderData = { plan: planName, customer_name: name, contact_handle: handle, situation_context: context };
+
+        // Update Checkout Popup Info
+        document.getElementById('checkoutPlanTitle').innerText = planName;
+        document.getElementById('checkoutPlanPrice').innerText = '₹' + planPrice;
+
+        // Generate Dynamic UPI QR Code for Selected Price
+        const upiUrl = `upi://pay?pa=scasharikaran@okaxis&pn=HangovaHelpers&am=${planPrice}&cu=INR`;
+        document.getElementById('upiQrImage').src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(upiUrl)}`;
+
+        // Show Modal
+        document.getElementById('paymentModal').classList.remove('hidden');
+      }
+
+      function closePaymentModal() {
+        document.getElementById('paymentModal').classList.add('hidden');
+      }
+
+      // STEP 2: SAVE TO SUPABASE ON FINAL SUBMIT
+      async function finalSubmitOrder() {
+        if (!pendingOrderData) return;
+
+        const btn = document.getElementById('finalPayBtn');
+        btn.innerText = 'Submitting...';
+        btn.disabled = true;
+
         const { data, error } = await _supabase
           .from('orders')
-          .insert([
-            { plan: selectedPlan, customer_name: name, contact_handle: handle, situation_context: context }
-          ]);
+          .insert([ pendingOrderData ]);
 
         if (error) {
           alert('Error submitting order: ' + error.message);
+          btn.innerText = '✅ I Have Paid & Submit Order';
+          btn.disabled = false;
         } else {
-          document.getElementById('success-msg').classList.remove('hidden');
+          closePaymentModal();
           document.getElementById('orderForm').reset();
           document.getElementById('plan60').checked = true;
+          document.getElementById('successModal').classList.remove('hidden');
+          btn.innerText = '✅ I Have Paid & Submit Order';
+          btn.disabled = false;
         }
-        submitBtn.innerText = '🚀 Confirm Payment & Submit Order';
-        submitBtn.disabled = false;
+      }
+
+      function closeSuccessModal() {
+        document.getElementById('successModal').classList.add('hidden');
       }
 
       function selectPlan(planId) {
