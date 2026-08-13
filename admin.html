@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HANGOVA HELPERS | Admin Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        body { background-color: #0b0d14; color: #ffffff; font-family: system-ui, -apple-system, sans-serif; }
+        .neon-text { background: linear-gradient(90deg, #ff2e93, #ff8a00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .neon-btn { background: linear-gradient(90deg, #ff2e93, #ff8a00); }
+    </style>
+</head>
+<body class="p-6">
+
+    <!-- LOGIN OVERLAY -->
+    <div id="loginModal" class="fixed inset-0 bg-black/90 flex items-center justify-center z-50">
+        <div class="bg-gray-900 border border-pink-500/50 p-8 rounded-2xl max-w-md w-full text-center shadow-2xl">
+            <h2 class="text-2xl font-black neon-text mb-2">ADMIN LOGIN</h2>
+            <p class="text-xs text-gray-400 mb-6">Enter secret passcode to access customer responses.</p>
+            <input type="password" id="adminPass" placeholder="Enter Admin Passcode" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-white mb-4 focus:border-pink-500 focus:outline-none text-center font-bold">
+            <button onclick="checkPass()" class="w-full neon-btn text-white font-bold py-3 rounded-xl hover:opacity-90 transition">Login to Dashboard</button>
+        </div>
+    </div>
+
+    <!-- MAIN DASHBOARD CONTENT -->
+    <div class="max-w-7xl mx-auto">
+        <div class="flex justify-between items-center mb-8 border-b border-gray-800 pb-4">
+            <div>
+                <h1 class="text-3xl font-black neon-text">HANGOVA HELPERS ADMIN</h1>
+                <p class="text-xs text-gray-400">Manage incoming customer rescue orders & statuses</p>
+            </div>
+            <button onclick="fetchOrders()" class="bg-pink-600 hover:bg-pink-700 text-white font-bold text-xs px-4 py-2 rounded-xl transition">🔄 Refresh Responses</button>
+        </div>
+
+        <!-- RESPONSES TABLE -->
+        <div class="overflow-x-auto bg-gray-900 border border-gray-800 rounded-2xl shadow-xl">
+            <table class="w-full text-left text-sm text-gray-300">
+                <thead class="bg-gray-950 text-pink-400 uppercase text-xs tracking-wider border-b border-gray-800">
+                    <tr>
+                        <th class="py-4 px-6">ID</th>
+                        <th class="py-4 px-6">Date</th>
+                        <th class="py-4 px-6">Customer</th>
+                        <th class="py-4 px-6">Handle</th>
+                        <th class="py-4 px-6">Plan</th>
+                        <th class="py-4 px-6">Situation Context</th>
+                        <th class="py-4 px-6">Status</th>
+                    </tr>
+                </thead>
+                <tbody id="ordersTable" class="divide-y divide-gray-800 text-xs">
+                    <tr>
+                        <td colspan="7" class="py-8 text-center text-gray-500">Loading customer responses...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+      const SUPABASE_URL = 'https://wzdisbcywcmobdwqcsql.supabase.co';
+      const _supabase = supabase.createClient(SUPABASE_URL, 'sb_publishable_8ETP_DR8lDc9Skl9spjupQ_cEXVb1');
+
+      // PASSCODE IS: admin123
+      function checkPass() {
+        const pass = document.getElementById('adminPass').value;
+        if (pass === 'admin123') {
+          document.getElementById('loginModal').classList.add('hidden');
+          fetchOrders();
+        } else {
+          alert('Wrong Passcode machan!');
+        }
+      }
+
+      async function fetchOrders() {
+        const { data, error } = await _supabase
+          .from('orders')
+          .select('*')
+          .order('id', { ascending: false });
+
+        const table = document.getElementById('ordersTable');
+        if (error) {
+          table.innerHTML = `<tr><td colspan="7" class="py-4 text-center text-red-500">Error loading: ${error.message}</td></tr>`;
+          return;
+        }
+
+        if (data.length === 0) {
+          table.innerHTML = `<tr><td colspan="7" class="py-8 text-center text-gray-500">No customer orders submitted yet.</td></tr>`;
+          return;
+        }
+
+        table.innerHTML = data.map(order => `
+          <tr class="hover:bg-gray-800/50 transition">
+            <td class="py-4 px-6 font-bold text-pink-400">#${order.id}</td>
+            <td class="py-4 px-6 text-gray-400">${new Date(order.created_at).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</td>
+            <td class="py-4 px-6 font-bold text-white">${order.customer_name}</td>
+            <td class="py-4 px-6 text-pink-300 font-mono">${order.contact_handle}</td>
+            <td class="py-4 px-6"><span class="bg-pink-950 text-pink-400 border border-pink-800 px-2 py-1 rounded-md text-[10px] font-bold">${order.plan}</span></td>
+            <td class="py-4 px-6 max-w-xs truncate text-gray-300" title="${order.situation_context}">${order.situation_context}</td>
+            <td class="py-4 px-6">
+              <select onchange="updateStatus(${order.id}, this.value)" class="bg-gray-950 border border-gray-700 text-xs rounded-lg px-2 py-1 text-white font-bold cursor-pointer">
+                <option value="Pending" ${order.status === 'Pending' ? 'selected' : ''}>🟡 Pending</option>
+                <option value="In Progress" ${order.status === 'In Progress' ? 'selected' : ''}>🔵 In Progress</option>
+                <option value="Completed" ${order.status === 'Completed' ? 'selected' : ''}>🟢 Completed</option>
+              </select>
+            </td>
+          </tr>
+        `).join('');
+      }
+
+      async function updateStatus(id, newStatus) {
+        await _supabase.from('orders').update({ status: newStatus }).eq('id', id);
+        alert('Status updated successfully!');
+      }
+    </script>
+</body>
+</html>

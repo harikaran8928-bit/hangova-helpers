@@ -5,13 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HANGOVA HELPERS | Your Ultimate Chat & Dating Wingman</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         body { background-color: #0b0d14; color: #ffffff; font-family: system-ui, -apple-system, sans-serif; }
         .neon-border { border: 1px solid #ff2e93; box-shadow: 0 0 15px rgba(255, 46, 147, 0.2); }
         .neon-btn { background: linear-gradient(90deg, #ff2e93, #ff8a00); }
         .neon-text { background: linear-gradient(90deg, #ff2e93, #ff8a00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        
-        /* PLAN RADIO SELECTION STYLES */
         .plan-radio:checked + label {
             background: linear-gradient(90deg, #ff2e93, #ff8a00) !important;
             border-color: #ff2e93 !important;
@@ -31,9 +30,7 @@
         <a href="index.html" class="text-pink-400">Home</a>
         <a href="#services" class="hover:text-pink-400 transition">Services</a>
         <a href="#order-form" class="hover:text-pink-400 transition">Order Direct</a>
-        <a href="#order-form" class="neon-btn text-white font-bold px-4 py-1.5 rounded-full text-xs hover:opacity-90 transition">
-          Get Help
-        </a>
+        <a href="admin.html" class="text-gray-400 hover:text-white transition">Admin</a>
         <button onclick="toggleLanguage()" id="langBtn" class="bg-pink-600 hover:bg-pink-700 text-white font-bold text-xs px-3 py-1.5 rounded-full transition cursor-pointer">
           தமிழ்
         </button>
@@ -45,16 +42,13 @@
         <span id="hero-badge" class="bg-pink-950/80 text-pink-400 text-xs font-semibold px-4 py-1.5 rounded-full uppercase tracking-widest border border-pink-800/50 inline-block mb-6">
             🔥 #1 Chat & Dating Rescue Service
         </span>
-        
         <h1 id="hero-title" class="text-4xl md:text-6xl font-black leading-tight mb-6">
             Stuck in Chat? <br>
             <span class="neon-text">HANGOVA HELPERS</span> Got You.
         </h1>
-        
         <p id="hero-desc" class="text-gray-400 text-lg md:text-xl mb-8 max-w-2xl mx-auto leading-relaxed">
             Don't get ghosted! Upload your chat screenshots, get high-converting text scripts & strategic dating advice from our assigned experts directly on-site.
         </p>
-
         <div class="flex flex-col sm:flex-row justify-center gap-4 mb-12">
             <a href="#order-form" id="btn-rescue" class="neon-btn text-white font-bold text-lg px-8 py-4 rounded-xl shadow-lg hover:scale-105 transition transform">
                 🚀 Rescue My Chat Directly
@@ -64,7 +58,6 @@
             </a>
         </div>
 
-        <!-- SAFETY & REFUND GUARANTEE HIGHLIGHT -->
         <div class="neon-border bg-gray-900/60 rounded-2xl p-5 text-left max-w-xl mx-auto text-xs text-gray-300">
             <p id="policy-title" class="font-bold text-pink-400 text-sm mb-2">🛡️ Official Terms & Refund Guarantee:</p>
             <ul class="list-disc pl-4 space-y-1.5 text-gray-400">
@@ -79,12 +72,11 @@
     <section id="how" class="py-16 px-6 bg-gray-950 border-t border-b border-gray-800/50">
         <div class="max-w-5xl mx-auto">
             <h2 id="how-title" class="text-3xl font-extrabold text-center mb-12">How It Works <span class="neon-text">(3 Simple Steps)</span></h2>
-            
             <div class="grid md:grid-cols-3 gap-8">
                 <div class="bg-gray-900/80 p-6 rounded-2xl border border-gray-800 text-center">
                     <div class="w-12 h-12 neon-btn flex items-center justify-center rounded-full text-white font-bold text-xl mx-auto mb-4">1</div>
                     <h3 id="step1-h" class="text-xl font-bold mb-2">Select Plan & Upload</h3>
-                    <p id="step1-p" class="text-gray-400 text-sm">Choose your plan and upload chat screenshots directly in our secure web portal.</p>
+                    <p id="step1-p" class="text-gray-400 text-sm">Choose your plan and submit your details directly in our secure web portal.</p>
                 </div>
                 <div class="bg-gray-900/80 p-6 rounded-2xl border border-gray-800 text-center">
                     <div class="w-12 h-12 neon-btn flex items-center justify-center rounded-full text-white font-bold text-xl mx-auto mb-4">2</div>
@@ -100,19 +92,18 @@
         </div>
     </section>
 
-    <!-- SERVICES & PRICING -->
+    <!-- SERVICES -->
     <section id="services" class="py-16 px-6 max-w-5xl mx-auto">
         <h2 id="plan-title" class="text-3xl font-extrabold text-center mb-4">Choose Your <span class="neon-text">Rescue Plan</span></h2>
         <p id="plan-subtitle" class="text-center text-gray-400 mb-12">Special Launch Offer — Fast response guaranteed.</p>
 
         <div class="grid md:grid-cols-3 gap-8">
-            <!-- Basic Plan -->
             <div class="bg-gray-900/50 border border-gray-800 p-8 rounded-2xl hover:border-pink-500/50 transition flex flex-col justify-between">
                 <div>
                     <h3 id="p1-title" class="text-xl font-bold mb-2">Single Chat Rescue</h3>
                     <p class="text-3xl font-extrabold mb-4">₹20 <span class="text-sm font-normal text-gray-400">/ session</span></p>
                     <ul class="text-gray-400 text-sm space-y-3 mb-8">
-                        <li id="p1-f1">✓ 1 Active Chat Screenshot Audit</li>
+                        <li id="p1-f1">✓ 1 Active Chat Audit</li>
                         <li id="p1-f2">✓ 3 Custom Reply Options</li>
                         <li id="p1-f3">✓ Response within 30 mins</li>
                     </ul>
@@ -120,7 +111,6 @@
                 <button onclick="selectPlan('plan20')" class="block w-full text-center bg-gray-800 hover:bg-gray-700 text-white font-bold py-3 rounded-xl transition cursor-pointer">Order This Plan</button>
             </div>
 
-            <!-- Pro Plan (Popular) -->
             <div class="neon-border bg-gray-900 p-8 rounded-2xl relative flex flex-col justify-between">
                 <div>
                     <span id="pop-tag" class="absolute -top-3 right-6 bg-pink-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase">Most Popular</span>
@@ -136,7 +126,6 @@
                 <button onclick="selectPlan('plan60')" class="block w-full text-center neon-btn text-white font-bold py-3 rounded-xl transition cursor-pointer">Order This Plan</button>
             </div>
 
-            <!-- Strategy Call -->
             <div class="bg-gray-900/50 border border-gray-800 p-8 rounded-2xl hover:border-pink-500/50 transition flex flex-col justify-between">
                 <div>
                     <h3 id="p3-title" class="text-xl font-bold mb-2">1-on-1 Call Strategy</h3>
@@ -152,14 +141,13 @@
         </div>
     </section>
 
-    <!-- DIRECT WEBSITE ORDER FORM SECTION -->
+    <!-- ORDER FORM -->
     <section id="order-form" class="py-16 px-6 max-w-3xl mx-auto">
         <div class="neon-border bg-gray-900/90 rounded-3xl p-8 md:p-10 shadow-2xl">
             <h2 id="form-heading" class="text-2xl md:text-4xl font-extrabold text-center mb-3">Submit Order <span class="neon-text">Directly Here</span></h2>
             <p id="form-sub" class="text-center text-gray-400 text-sm mb-8">No personal numbers required. 100% Encrypted & Private Submission.</p>
 
-            <form onsubmit="handleOrderSubmit(event)" class="space-y-6">
-                <!-- VISUAL PLAN SELECTION BUTTONS -->
+            <form id="orderForm" onsubmit="handleOrderSubmit(event)" class="space-y-6">
                 <div>
                     <label class="block text-xs font-bold text-pink-400 uppercase tracking-wider mb-3">Select Plan (Click to Choose)</label>
                     <div class="grid grid-cols-3 gap-3">
@@ -187,31 +175,26 @@
                 <div class="grid md:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2">Your Name / Nickname</label>
-                        <input type="text" required placeholder="e.g. Karan" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-white focus:border-pink-500 focus:outline-none">
+                        <input type="text" id="custName" required placeholder="e.g. Karan" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-white focus:border-pink-500 focus:outline-none">
                     </div>
                     <div>
                         <label class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2">Contact Preference (Instagram / Telegram / Discord ID)</label>
-                        <input type="text" required placeholder="@your_handle or ID" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-white focus:border-pink-500 focus:outline-none">
+                        <input type="text" id="custHandle" required placeholder="@your_handle or ID" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-white focus:border-pink-500 focus:outline-none">
                     </div>
                 </div>
 
                 <div>
                     <label class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2">Describe Your Chat Situation / Context</label>
-                    <textarea rows="3" required placeholder="Explain what happened or what reply you need..." class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-white focus:border-pink-500 focus:outline-none"></textarea>
+                    <textarea id="custContext" rows="3" required placeholder="Explain what happened or what reply you need..." class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-white focus:border-pink-500 focus:outline-none"></textarea>
                 </div>
 
-                <div>
-                    <label class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2">Attach Chat Screenshot(s)</label>
-                    <input type="file" accept="image/*" multiple class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-2.5 text-xs text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-pink-600 file:text-white hover:file:bg-pink-700 cursor-pointer">
-                </div>
-
-                <button type="submit" class="w-full neon-btn text-white font-extrabold text-lg py-4 rounded-xl shadow-lg hover:scale-[1.02] transition transform cursor-pointer">
+                <button type="submit" id="submitBtn" class="w-full neon-btn text-white font-extrabold text-lg py-4 rounded-xl shadow-lg hover:scale-[1.02] transition transform cursor-pointer">
                     🚀 Submit Order & Request Assistance
                 </button>
             </form>
 
             <div id="success-msg" class="hidden mt-6 bg-pink-950/80 border border-pink-500 text-pink-200 p-4 rounded-xl text-center text-sm font-semibold">
-                ✅ Order Received Successfully! Our assigned expert is processing your context and will reach out to your handle shortly.
+                ✅ Order Saved to Database! Our assigned expert is processing your context and will reach out to your handle shortly.
             </div>
         </div>
     </section>
@@ -222,104 +205,39 @@
         <p id="footer-terms">Official Terms: All communication assistance is handled strictly by assigned Hangova Helpers representatives for guidance purposes only. In case we are unable to process or fulfill your request, <b>70% of the amount will be refunded</b>.</p>
     </footer>
 
-    <!-- SCRIPT FOR SELECTION & TRANSLATION -->
+    <!-- SUPABASE CLIENT & SCRIPT -->
     <script>
+      const SUPABASE_URL = 'https://wzdisbcywcmobdwqcsql.supabase.co';
+      const _supabase = supabase.createClient(SUPABASE_URL, 'sb_publishable_8ETP_DR8lDc9Skl9spjupQ_cEXVb1');
+
       let currentLang = 'en';
 
-      const taText = {
-        'hero-badge': '🔥 #1 சாட் & டேட்டிங் உதவி சேவை',
-        'hero-title': 'சாட்டில் சிக்கிக் கொண்டீர்களா? <br><span class="neon-text">HANGOVA HELPERS</span> உங்களுக்காக உள்ளது.',
-        'hero-desc': 'ரிப்ளை வராமல் ஏமாறாதீர்கள்! உங்கள் சாட் ஸ்கிரீன்ஷாட்களை நேரடியாக இணையதளத்தில் பதிவேற்றி, எங்களின் வல்லுநர்களிடம் இருந்து சிறந்த பதில்களைப் பெறுங்கள்.',
-        'btn-rescue': '🚀 நேரடி உதவி பெற',
-        'btn-how': 'இது எவ்வாறு இயங்குகிறது',
-        'policy-title': '🛡️ அதிகாரப்பூர்வ விதிகள் & பணத்தைத் திரும்பப்பெறும் உத்தரவாதம்:',
-        'policy-1': 'நியமிக்கப்பட்ட HANGOVA HELPERS பணியாளர்கள் மட்டுமே உங்கள் கோரிக்கையைச் செயல்படுத்துவார்கள்.',
-        'policy-2': '<b>70% பணத்தைத் திரும்பப்பெறும் கொள்கை:</b> எங்களால் உங்கள் கோரிக்கையைச் செய்ய முடியாவிட்டால், <b>செலுத்திய தொகையில் 70% உடனடியாகத் திரும்ப அளிக்கப்படும்</b>.',
-        'policy-3': '<b>100% தனியுரிமை:</b> ஸ்கிரீன்ஷாட்கள் இரகசியமாக வைக்கப்பட்டு உடனடியாக அழிக்கப்படும்.',
-        'how-title': 'இது எவ்வாறு இயங்குகிறது <span class="neon-text">(3 எளிய படிகள்)</span>',
-        'step1-h': 'திட்டம் தேர்வு & பதிவேற்றம்',
-        'step1-p': 'உங்கள் திட்டத்தைத் தேர்ந்தெடுத்து சாட் ஸ்கிரீன்ஷாட்களை எங்கள் போர்ட்டலில் பாதுகாப்பாகப் பதிவேற்றுங்கள்.',
-        'step2-h': 'வல்லுநர் பகுப்பாய்வு',
-        'step2-p': 'எங்கள் வல்லுநர் உரையாடலின் தொனி மற்றும் சூழலை பகுப்பாய்வு செய்கிறார்.',
-        'step3-h': 'தீர்வு பெறுங்கள்',
-        'step3-p': 'உரையாடலைத் தொடர உங்களுக்கு ஏற்றவாறு தயாரித்த பதில்கள் மற்றும் ஆலோசனைகளைப் பெறுங்கள்.',
-        'plan-title': 'உங்கள் <span class="neon-text">திட்டத்தை தேர்ந்தெடுக்கவும்</span>',
-        'plan-subtitle': 'சிறப்புத் தொடக்கச் சலுகை — உடனடி பதில் உத்தரவாதம்.',
-        'p1-title': 'ஒற்றை சாட் உதவி',
-        'p1-f1': '✓ 1 சாட் ஸ்கிரீன்ஷாட் பகுப்பாய்வு',
-        'p1-f2': '✓ 3 தனிப்பயன் பதில் விருப்பங்கள்',
-        'p1-f3': '✓ 30 நிமிடங்களுக்குள் பதில்',
-        'pop-tag': 'மிகவும் பிரபலம்',
-        'p2-title': 'ப்ரோ விங்மேன்',
-        'p2-f1': '✓ முழு சாட் வரலாற்று பகுப்பாய்வு',
-        'p2-f2': '✓ 3 நாட்கள் தொடர்ச்சியான வழிகாட்டுதல்',
-        'p2-f3': '✓ பயோ மற்றும் சுயவிவர உத்தி',
-        'p2-f4': '✓ பிரத்யேக உதவியாளர் வழிகாட்டுதல்',
-        'p3-title': '1-க்கு-1 அழைப்பு உத்தி',
-        'p3-f1': '✓ 30 நிமிட ஆடியோ அழைப்பு',
-        'p3-f2': '✓ மனநிலை மற்றும் தகவல் தொடர்பு பயிற்சி',
-        'p3-f3': '✓ தனிப்பயனாக்கப்பட்ட செயல் திட்டம்',
-        'form-heading': 'ஆர்டரை <span class="neon-text">நேரடியாக சமர்ப்பிக்கவும்</span>',
-        'form-sub': 'தனிப்பட்ட எண்கள் தேவையில்லை. 100% பாதுகாப்பான சமர்ப்பிப்பு.',
-        'footer-terms': 'அதிகாரப்பூர்வ விதிகள்: அனைத்து தகவல்தொடர்பு உதவிகளும் வழிகாட்டுதல் நோக்கங்களுக்காக மட்டுமே. எங்களால் உங்கள் கோரிக்கையைச் செயல்படுத்த முடியாவிட்டால், 70% தொகை உடனடியாகத் திரும்ப வழங்கப்படும்.'
-      };
+      async function handleOrderSubmit(e) {
+        e.preventDefault();
+        const submitBtn = document.getElementById('submitBtn');
+        submitBtn.innerText = 'Submitting...';
+        submitBtn.disabled = true;
 
-      const enText = {
-        'hero-badge': '🔥 #1 Chat & Dating Rescue Service',
-        'hero-title': 'Stuck in Chat? <br><span class="neon-text">HANGOVA HELPERS</span> Got You.',
-        'hero-desc': "Don't get ghosted! Upload your chat screenshots, get high-converting text scripts & strategic dating advice from our assigned experts directly on-site.",
-        'btn-rescue': '🚀 Rescue My Chat Directly',
-        'btn-how': 'How It Works',
-        'policy-title': '🛡️ Official Terms & Refund Guarantee:',
-        'policy-1': 'Only officially assigned HANGOVA HELPERS staff will process your request.',
-        'policy-2': '<b>70% Refund Policy:</b> If we are unable to fulfill or process your requested work, <b>70% of the amount will be refunded</b> immediately.',
-        'policy-3': '<b>100% Privacy:</b> Screenshots are strictly confidential & permanently deleted post-session.',
-        'how-title': 'How It Works <span class="neon-text">(3 Simple Steps)</span>',
-        'step1-h': 'Select Plan & Upload',
-        'step1-p': 'Choose your plan and upload chat screenshots directly in our secure web portal.',
-        'step2-h': 'Expert Analysis',
-        'step2-p': 'Our assigned wingman analyzes the vibe, context, and psychology.',
-        'step3-h': 'Receive Solution',
-        'step3-p': 'Get custom scripts and strategy tailored specifically to rescue your conversation.',
-        'plan-title': 'Choose Your <span class="neon-text">Rescue Plan</span>',
-        'plan-subtitle': 'Special Launch Offer — Fast response guaranteed.',
-        'p1-title': 'Single Chat Rescue',
-        'p1-f1': '✓ 1 Active Chat Screenshot Audit',
-        'p1-f2': '✓ 3 Custom Reply Options',
-        'p1-f3': '✓ Response within 30 mins',
-        'pop-tag': 'Most Popular',
-        'p2-title': 'Pro Wingman',
-        'p2-f1': '✓ Full Chat History Audit',
-        'p2-f2': '✓ 3 Days Ongoing Text Scripts',
-        'p2-f3': '✓ Bio & Profile Strategy',
-        'p2-f4': '✓ Assigned Helper Guidance',
-        'p3-title': '1-on-1 Call Strategy',
-        'p3-f1': '✓ 30-Min Private Audio Session',
-        'p3-f2': '✓ Mindset & Communication Coaching',
-        'p3-f3': '✓ Customized Action Plan',
-        'form-heading': 'Submit Order <span class="neon-text">Directly Here</span>',
-        'form-sub': 'No personal numbers required. 100% Encrypted & Private Submission.',
-        'footer-terms': 'Official Terms: All communication assistance is handled strictly by assigned Hangova Helpers representatives for guidance purposes only. In case we are unable to process or fulfill your request, 70% of the amount will be refunded.'
-      };
+        const selectedPlan = document.querySelector('input[name="plan_choice"]:checked').value;
+        const name = document.getElementById('custName').value;
+        const handle = document.getElementById('custHandle').value;
+        const context = document.getElementById('custContext').value;
 
-      function toggleLanguage() {
-        const btn = document.getElementById('langBtn');
-        const langData = (currentLang === 'en') ? taText : enText;
+        const { data, error } = await _supabase
+          .from('orders')
+          .insert([
+            { plan: selectedPlan, customer_name: name, contact_handle: handle, situation_context: context }
+          ]);
 
-        for (let key in langData) {
-          const el = document.getElementById(key);
-          if (el) {
-            el.innerHTML = langData[key];
-          }
-        }
-
-        if (currentLang === 'en') {
-          currentLang = 'ta';
-          btn.innerText = 'English';
+        if (error) {
+          alert('Error submitting order: ' + error.message);
         } else {
-          currentLang = 'en';
-          btn.innerText = 'தமிழ்';
+          document.getElementById('success-msg').classList.remove('hidden');
+          document.getElementById('orderForm').reset();
+          document.getElementById('plan60').checked = true;
         }
+        submitBtn.innerText = '🚀 Submit Order & Request Assistance';
+        submitBtn.disabled = false;
       }
 
       function selectPlan(planId) {
@@ -327,11 +245,15 @@
         document.getElementById('order-form').scrollIntoView({ behavior: 'smooth' });
       }
 
-      function handleOrderSubmit(e) {
-        e.preventDefault();
-        document.getElementById('success-msg').classList.remove('hidden');
-        e.target.reset();
-        document.getElementById('plan60').checked = true;
+      function toggleLanguage() {
+        const btn = document.getElementById('langBtn');
+        if (currentLang === 'en') {
+            currentLang = 'ta';
+            btn.innerText = 'English';
+        } else {
+            currentLang = 'en';
+            btn.innerText = 'தமிழ்';
+        }
       }
     </script>
 </body>
