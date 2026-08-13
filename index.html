@@ -77,18 +77,18 @@
             <div class="grid md:grid-cols-3 gap-8">
                 <div class="bg-gray-900/80 p-6 rounded-2xl border border-gray-800 text-center">
                     <div class="w-12 h-12 neon-btn flex items-center justify-center rounded-full text-white font-bold text-xl mx-auto mb-4">1</div>
-                    <h3 id="step1-h" class="text-xl font-bold mb-2">Select Plan & Upload</h3>
-                    <p id="step1-p" class="text-gray-400 text-sm">Choose your plan and submit your details directly in our secure web portal.</p>
+                    <h3 id="step1-h" class="text-xl font-bold mb-2">Select Plan & Pay</h3>
+                    <p id="step1-p" class="text-gray-400 text-sm">Choose your plan and scan the GPay/UPI QR code to make payment.</p>
                 </div>
                 <div class="bg-gray-900/80 p-6 rounded-2xl border border-gray-800 text-center">
                     <div class="w-12 h-12 neon-btn flex items-center justify-center rounded-full text-white font-bold text-xl mx-auto mb-4">2</div>
                     <h3 id="step2-h" class="text-xl font-bold mb-2">Expert Analysis</h3>
-                    <p id="step2-p" class="text-gray-400 text-sm">Our assigned wingman analyzes the vibe, context, and psychology.</p>
+                    <p id="step2-p" class="text-gray-400 text-sm">Our assigned wingman analyzes your screenshots and chat context.</p>
                 </div>
                 <div class="bg-gray-900/80 p-6 rounded-2xl border border-gray-800 text-center">
                     <div class="w-12 h-12 neon-btn flex items-center justify-center rounded-full text-white font-bold text-xl mx-auto mb-4">3</div>
                     <h3 id="step3-h" class="text-xl font-bold mb-2">Receive Solution</h3>
-                    <p id="step3-p" class="text-gray-400 text-sm">Get custom scripts and strategy tailored specifically to rescue your conversation.</p>
+                    <p id="step3-p" class="text-gray-400 text-sm">Get custom scripts & advice directly delivered to your handle.</p>
                 </div>
             </div>
         </div>
@@ -143,15 +143,16 @@
         </div>
     </section>
 
-    <!-- ORDER FORM -->
+    <!-- ORDER FORM WITH UPI PAYMENT -->
     <section id="order-form" class="py-16 px-6 max-w-3xl mx-auto">
         <div class="neon-border bg-gray-900/90 rounded-3xl p-8 md:p-10 shadow-2xl">
             <h2 id="form-heading" class="text-2xl md:text-4xl font-extrabold text-center mb-3">Submit Order <span class="neon-text">Directly Here</span></h2>
             <p id="form-sub" class="text-center text-gray-400 text-sm mb-8">No personal numbers required. 100% Encrypted & Private Submission.</p>
 
             <form id="orderForm" onsubmit="handleOrderSubmit(event)" class="space-y-6">
+                <!-- PLAN CHOICE -->
                 <div>
-                    <label class="block text-xs font-bold text-pink-400 uppercase tracking-wider mb-3">Select Plan (Click to Choose)</label>
+                    <label class="block text-xs font-bold text-pink-400 uppercase tracking-wider mb-3">1. Select Plan (Click to Choose)</label>
                     <div class="grid grid-cols-3 gap-3">
                         <div>
                             <input type="radio" id="plan20" name="plan_choice" value="Single Chat Rescue (₹20)" class="hidden plan-radio">
@@ -174,13 +175,27 @@
                     </div>
                 </div>
 
+                <!-- UPI PAYMENT BOX -->
+                <div class="bg-gray-950 border border-pink-500/30 p-5 rounded-2xl text-center space-y-3">
+                    <p class="text-xs font-bold text-pink-400 uppercase tracking-wider">2. Scan & Pay via GPay / PhonePe / Paytm / BHIM</p>
+                    
+                    <div class="bg-gray-900 border border-gray-800 rounded-xl p-3 inline-block">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=upi://pay?pa=scasharikaran@okaxis&pn=HangovaHelpers&cu=INR" alt="UPI Payment QR Code" class="w-40 h-40 mx-auto rounded-lg shadow-md">
+                    </div>
+
+                    <div class="text-xs text-gray-300">
+                        Official UPI ID: <span class="text-pink-400 font-mono font-bold bg-gray-900 px-3 py-1 rounded-md border border-gray-800 select-all">scasharikaran@okaxis</span>
+                    </div>
+                </div>
+
+                <!-- USER DETAILS -->
                 <div class="grid md:grid-cols-2 gap-4">
                     <div>
-                        <label class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2">Your Name / Nickname</label>
+                        <label class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2">3. Your Name / Nickname</label>
                         <input type="text" id="custName" required placeholder="e.g. Karan" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-white focus:border-pink-500 focus:outline-none">
                     </div>
                     <div>
-                        <label class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2">Contact Preference (Instagram / Telegram / Discord ID)</label>
+                        <label class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2">Contact Preference (Instagram / Telegram ID)</label>
                         <input type="text" id="custHandle" required placeholder="@your_handle or ID" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-white focus:border-pink-500 focus:outline-none">
                     </div>
                 </div>
@@ -191,22 +206,21 @@
                 </div>
 
                 <button type="submit" id="submitBtn" class="w-full neon-btn text-white font-extrabold text-lg py-4 rounded-xl shadow-lg hover:scale-[1.02] transition transform cursor-pointer">
-                    🚀 Submit Order & Request Assistance
+                    🚀 Confirm Payment & Submit Order
                 </button>
             </form>
 
             <div id="success-msg" class="hidden mt-6 bg-pink-950/80 border border-pink-500 text-pink-200 p-4 rounded-xl text-center text-sm font-semibold">
-                ✅ Order Saved to Database! Our assigned expert is processing your context and will reach out to your handle shortly.
+                ✅ Order & Payment Confirmation Received! Our assigned expert is processing your context and will reach out to your handle shortly.
             </div>
         </div>
     </section>
 
-    <!-- ADMIN MODAL OVERLAY (POPUP) -->
+    <!-- ADMIN MODAL OVERLAY -->
     <div id="adminModal" class="hidden fixed inset-0 bg-black/95 z-50 p-4 overflow-y-auto">
         <div class="max-w-6xl mx-auto my-10 bg-gray-900 border border-pink-500/50 rounded-3xl p-6 md:p-8 shadow-2xl relative">
             <button onclick="closeAdminModal()" class="absolute top-6 right-6 text-gray-400 hover:text-white font-black text-xl bg-gray-800 px-3 py-1 rounded-full">✕</button>
             
-            <!-- PASSCODE PROMPT -->
             <div id="adminAuthBox" class="text-center py-10">
                 <h2 class="text-3xl font-black neon-text mb-2">ADMIN LOGIN</h2>
                 <p class="text-xs text-gray-400 mb-6">Enter secret passcode to access customer responses.</p>
@@ -215,12 +229,11 @@
                 <button onclick="checkAdminPass()" class="neon-btn text-white font-bold px-8 py-3 rounded-xl hover:opacity-90 transition cursor-pointer">Login to Dashboard</button>
             </div>
 
-            <!-- DASHBOARD DATA (HIDDEN UNTIL LOGIN) -->
             <div id="adminDataBox" class="hidden">
                 <div class="flex justify-between items-center mb-6 border-b border-gray-800 pb-4">
                     <div>
                         <h2 class="text-2xl font-black neon-text">HANGOVA HELPERS RESPONSES</h2>
-                        <p class="text-xs text-gray-400">Live Customer Requests from Supabase Database</p>
+                        <p class="text-xs text-gray-400">Live Customer Requests & Payments from Supabase</p>
                     </div>
                     <button onclick="fetchOrdersData()" class="bg-pink-600 hover:bg-pink-700 text-white font-bold text-xs px-4 py-2 rounded-xl transition cursor-pointer">🔄 Refresh Responses</button>
                 </div>
@@ -286,7 +299,7 @@
           document.getElementById('orderForm').reset();
           document.getElementById('plan60').checked = true;
         }
-        submitBtn.innerText = '🚀 Submit Order & Request Assistance';
+        submitBtn.innerText = '🚀 Confirm Payment & Submit Order';
         submitBtn.disabled = false;
       }
 
@@ -295,7 +308,6 @@
         document.getElementById('order-form').scrollIntoView({ behavior: 'smooth' });
       }
 
-      /* ADMIN MODAL LOGIC */
       function openAdminModal() {
         document.getElementById('adminModal').classList.remove('hidden');
       }
