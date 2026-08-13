@@ -6,6 +6,7 @@
     <title>HANGOVA HELPERS | Your Ultimate Chat & Dating Wingman</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&display=swap" rel="stylesheet">
     <style>
         body { background-color: #0b0d14; color: #ffffff; font-family: system-ui, -apple-system, sans-serif; }
         .neon-border { border: 1px solid #ff2e93; box-shadow: 0 0 15px rgba(255, 46, 147, 0.2); }
@@ -17,9 +18,51 @@
             color: #ffffff !important;
             box-shadow: 0 0 15px rgba(255, 46, 147, 0.5);
         }
+
+        /* 3-SECOND INTRO PRELOADER ANIMATION */
+        .intro-bg {
+            background-image: url('download (1).jpg');
+            background-size: cover;
+            background-position: center;
+            animation: moveBg 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes moveBg {
+            0% { transform: scale(1); filter: brightness(0.8) contrast(1.1); }
+            100% { transform: scale(1.1); filter: brightness(1) contrast(1.3); }
+        }
+
+        .red-neon-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #ff003c;
+            text-shadow: 0 0 15px #ff003c, 0 0 30px #ff003c, 0 0 60px #ff0055;
+            letter-spacing: 5px;
+        }
+
+        #introPreloader {
+            animation: fadeOutIntro 0.8s ease 3s forwards;
+        }
+
+        @keyframes fadeOutIntro {
+            to { opacity: 0; visibility: hidden; pointer-events: none; }
+        }
     </style>
 </head>
 <body class="antialiased selection:bg-pink-500 selection:text-white">
+
+    <!-- 3-SECOND AESTHETIC INTRO OVERLAY -->
+    <div id="introPreloader" class="fixed inset-0 z-[100] flex items-center justify-center bg-black overflow-hidden">
+        <div class="absolute inset-0 intro-bg opacity-75"></div>
+        <div class="absolute inset-0 bg-black/40 backdrop-blur-[2px]"></div>
+        <div class="relative z-10 text-center px-4 animate-pulse">
+            <h1 class="text-3xl md:text-6xl font-black red-neon-title uppercase tracking-widest leading-tight">
+                WELCOME TO HANGOVA
+            </h1>
+            <p class="text-xs md:text-sm text-pink-200 tracking-[0.4em] mt-4 font-bold uppercase opacity-90">
+                Ultimate Chat & Dating Wingman
+            </p>
+        </div>
+    </div>
 
     <!-- NAVBAR WITH TAMIL TOGGLE & ADMIN LINK -->
     <nav class="flex justify-between items-center px-6 py-4 border-b border-gray-800 bg-gray-950/80 backdrop-blur-md fixed w-full top-0 z-50">
